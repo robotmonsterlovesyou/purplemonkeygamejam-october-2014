@@ -1,0 +1,41 @@
+{
+  "name": "facade.js",
+  "description": "Drawing shapes, images and text in HTML5 canvas made easy.",
+  "version": "0.3.0-beta.6",
+  "main": "facade.js",
+  "license": "MIT",
+  "ignore": [
+    "docs/header.html",
+    "tests/",
+    ".gitignore",
+    ".jslintrc",
+    ".travis.yml",
+    "Gruntfile.js",
+    "*.json"
+  ],
+  "keywords": [
+    "canvas",
+    "drawing"
+  ],
+  "authors": [
+    {
+      "name": "Scott Doxey",
+      "email": "hello@scottdoxey.com",
+      "homepage": "http://scottdoxey.com/"
+    }
+  ],
+  "homepage": "http://facadejs.com/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/facadejs/Facade.js.git"
+  },
+  "_release": "0.3.0-beta.6",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.0-beta.6",
+    "commit": "1e28cf053f53d0b86aa7c032bd87ee16069884bb"
+  },
+  "_source": "git://github.com/facadejs/Facade.js.git",
+  "_target": "0.3.0-beta.6",
+  "_originalSource": "facade.js"
+}
