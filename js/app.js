@@ -55,7 +55,15 @@ define(function (require) {
 
         if (e.keyCode === 32) {
 
-            stage.stop();
+            if (stage._requestAnimation) {
+
+                stage.stop();
+
+            } else {
+
+                stage.start();
+
+            }
 
         }
 
