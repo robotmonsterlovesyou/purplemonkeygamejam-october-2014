@@ -4,7 +4,7 @@
     "version": "0.0.1",
     "dependencies": {
         "facade.js": "0.3.0-beta.6",
-        "facadejs-Box2D-plugin": "neogeek/facadejs-Box2D-plugin",
+        "facadejs-SATjs-plugin": "neogeek/facadejs-SATjs-plugin",
         "gamepad.js": "neogeek/gamepad.js",
         "requirejs": "2.1.15"
     },

@@ -1,0 +1,13 @@
+{
+  "name": "facadejs-SATjs-plugin",
+  "homepage": "https://github.com/neogeek/facadejs-SATjs-plugin",
+  "_release": "c7b6ffad3c",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "c7b6ffad3c199c11967d10e3b797b937078af27a"
+  },
+  "_source": "git://github.com/neogeek/facadejs-SATjs-plugin.git",
+  "_target": "*",
+  "_originalSource": "neogeek/facadejs-SATjs-plugin"
+}
