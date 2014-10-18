@@ -7,6 +7,8 @@ define(function (require) {
 
     var Facade = require('facade'),
         Gamepad = require('gamepadjs'),
+        world = require('entities/world'),
+        bulletEntity = require('entities/bullet'),
         controls = new Gamepad();
 
     return function (pos) {
@@ -72,6 +74,33 @@ define(function (require) {
             } else if (e.value[1] > 0.5) {
 
                 controls.trigger('hold', 'd_pad_down');
+
+            }
+
+        });
+
+        controls.on('hold', 'stick_axis_right', function (e) {
+
+            var bullet,
+                pos = player.getAllOptions();
+
+            if (e.value[0] < -0.5) {
+
+                world.entities.push(new bulletEntity({ x: pos.x, y: pos.y }, e.value));
+
+            } else if (e.value[0] > 0.5) {
+
+                world.entities.push(new bulletEntity({ x: pos.x, y: pos.y }, e.value));
+
+            }
+
+            if (e.value[1] < -0.5) {
+
+                world.entities.push(new bulletEntity({ x: pos.x, y: pos.y }, e.value));
+
+            } else if (e.value[1] > 0.5) {
+
+                world.entities.push(new bulletEntity({ x: pos.x, y: pos.y }, e.value));
 
             }
 
