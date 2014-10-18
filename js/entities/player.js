@@ -7,6 +7,7 @@ define(function (require) {
 
     var Facade = require('facade'),
         Gamepad = require('gamepadjs'),
+        Utils = require('utils'),
         world = require('entities/world'),
         bulletEntity = require('entities/bullet'),
         controls = new Gamepad();
@@ -19,17 +20,24 @@ define(function (require) {
 
         }
 
+        var stickThreshold = 0.3;
+
         var player = {
-            sprite: new Facade.Rect({
-                x: pos.x,
-                y: pos.y,
-                width: 15,
-                height: 15,
-                fillStyle: 'red'
+            sprite: new Facade.Image('images/player.png', {
+                anchor: 'center',
+                scale: 0.5
             }),
-            velocity: 0,
-            direction: 0,
-            weaponCooldown: 0,
+            velocity: {
+                mag: 0,
+                dir: 0
+            },
+            faction: faction,
+            speed: 5, // move to faction code later
+            thrust: 0.2, // move to faction code later
+            weapon: {
+                dir: 0,
+                cooldown: 0,
+            },
             destory: function () {
 
                 world.entities.players.splice(world.entities.players.indexOf(bullet), 1);
@@ -37,8 +45,17 @@ define(function (require) {
             },
             update: function () {
 
+                var move = Utils.polarToCart(this.velocity.mag, this.velocity.dir),
+                    newPos = {
+                        x: this.sprite.getOption('x') + move.x,
+                        y: this.sprite.getOption('y') + move.y
+                    };
 
-
+                this.sprite.setOptions({
+                    x: newPos.x,
+                    y: newPos.y,
+                    rotate: this.weapon.dir * 180 / Math.PI
+                });
             }
         };
 
@@ -72,24 +89,26 @@ define(function (require) {
 
         controls.on('hold', 'stick_axis_left', function (e) {
 
-            if (e.value[0] < -0.5) {
+            var stickVelP,
+                stickVelC,
+                playerVelC,
+                finalVelP;
 
-                controls.trigger('hold', 'd_pad_left');
+            stickVelP = Utils.cartToPolar(e.value[0], e.value[1]);
 
-            } else if (e.value[0] > 0.5) {
-
-                controls.trigger('hold', 'd_pad_right');
-
+            if (stickVelP.radius > stickThreshold) {
+                // apply thrust multiplier, then convert back to cartesian for vector addition
+                stickVelP.radius *= player.thrust;
+                stickVelC = Utils.polarToCart(stickVelP.radius, stickVelP.angle);
+                playerVelC = Utils.polarToCart(player.velocity.mag, player.velocity.dir);
+                // then store final velocity in polar
+                finalVelP = Utils.cartToPolar(stickVelC.x + playerVelC.x, stickVelC.y + playerVelC.y);
+console.log(stickVelP, stickVelC, playerVelC, finalVelP);
+                player.velocity.mag = finalVelP.radius;
+                player.velocity.dir = finalVelP.angle;
             }
-
-            if (e.value[1] < -0.5) {
-
-                controls.trigger('hold', 'd_pad_up');
-
-            } else if (e.value[1] > 0.5) {
-
-                controls.trigger('hold', 'd_pad_down');
-
+            if (player.velocity.mag > player.speed){
+                player.velocity.mag = player.speed
             }
 
         });
@@ -97,18 +116,23 @@ define(function (require) {
         controls.on('hold', 'stick_axis_right', function (e) {
 
             var bullet,
-                pos = player.sprite.getAllOptions();
+                pos = player.sprite.getAllOptions(),
+                stickVel = Utils.cartToPolar(e.value[0], e.value[1]);
 
-            if (player.weaponCooldown > 0) {
-
-                player.weaponCooldown -= .1;
-
+            if (stickVel.radius > stickThreshold) {
+                player.weapon.dir = stickVel.angle;
+            }
+            if (player.weapon.cooldown > 0) {
+                player.weapon.cooldown -= .1;
                 return false;
-
             }
 
-            player.weaponCooldown = .5;
+            player.weapon.cooldown = .5;
+            if (stickVel.radius > stickThreshold) {
 
+                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, e.value));
+            }
+/*
             if (e.value[0] < -0.5) {
 
                 world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, e.value));
@@ -127,7 +151,7 @@ define(function (require) {
 
                 world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, e.value));
 
-            }
+            }*/
 
         });
 
