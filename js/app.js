@@ -52,4 +52,52 @@ define(function (require) {
 
     });
 
+    controls.on('hold', 'd_pad_left', function () {
+
+        player.setOptions({ x: '-=5' });
+
+    });
+
+    controls.on('hold', 'd_pad_right', function () {
+
+        player.setOptions({ x: '+=5' });
+
+    });
+
+    controls.on('hold', 'd_pad_up', function () {
+
+        player.setOptions({ y: '-=5' });
+
+    });
+
+    controls.on('hold', 'd_pad_down', function () {
+
+        player.setOptions({ y: '+=5' });
+
+    });
+
+    controls.on('hold', 'stick_axis_left', function (e) {
+
+        if (e.value[0] < -0.5) {
+
+            controls.trigger('hold', 'd_pad_left');
+
+        } else if (e.value[0] > 0.5) {
+
+            controls.trigger('hold', 'd_pad_right');
+
+        }
+
+        if (e.value[1] < -0.5) {
+
+            controls.trigger('hold', 'd_pad_up');
+
+        } else if (e.value[1] > 0.5) {
+
+            controls.trigger('hold', 'd_pad_down');
+
+        }
+
+    });
+
 });
