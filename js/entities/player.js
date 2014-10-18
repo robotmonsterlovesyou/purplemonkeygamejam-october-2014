@@ -29,7 +29,17 @@ define(function (require) {
             }),
             velocity: 0,
             direction: 0,
-            weaponCooldown: 0
+            weaponCooldown: 0,
+            destory: function () {
+
+                world.entities.players.splice(world.entities.players.indexOf(bullet), 1);
+
+            },
+            update: function () {
+
+
+
+            }
         };
 
         require('facadejs-SATjs-plugin');

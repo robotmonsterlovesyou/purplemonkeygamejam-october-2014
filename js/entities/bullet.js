@@ -29,53 +29,51 @@ define(function (require) {
                 fillStyle: 'blue'
             }),
             velocity: 0,
-            direction: 0
+            direction: 0,
+            destory: function () {
+
+                world.entities.bullets[faction].splice(world.entities.bullets[faction].indexOf(bullet), 1);
+
+            },
+            update: function () {
+
+                var pos,
+                    speed = 5;
+
+                if (direction[0] > 0) {
+
+                    bullet.sprite.setOptions({ x: '+=' + speed });
+
+                } else if (direction[0] < 0) {
+
+                    bullet.sprite.setOptions({ x: '-=' + speed });
+
+                }
+
+                if (direction[1] > 0) {
+
+                    bullet.sprite.setOptions({ y: '+=' + speed });
+
+                } else if (direction[1] < 0) {
+
+                    bullet.sprite.setOptions({ y: '-=' + speed });
+
+                }
+
+                pos = bullet.sprite.getAllOptions();
+
+                if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height()) {
+
+                    bullet.destory();
+
+                }
+
+            }
         };
 
         require('facadejs-SATjs-plugin');
 
         bullet.sprite.SAT('setVector');
-
-        function update () {
-
-            var pos,
-                speed = 5;
-
-            if (direction[0] > 0) {
-
-                bullet.sprite.setOptions({ x: '+=' + speed });
-
-            } else if (direction[0] < 0) {
-
-                bullet.sprite.setOptions({ x: '-=' + speed });
-
-            }
-
-            if (direction[1] > 0) {
-
-                bullet.sprite.setOptions({ y: '+=' + speed });
-
-            } else if (direction[1] < 0) {
-
-                bullet.sprite.setOptions({ y: '-=' + speed });
-
-            }
-
-            pos = bullet.sprite.getAllOptions();
-
-            if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height()) {
-
-                world.entities.bullets[faction].splice(world.entities.bullets[faction].indexOf(bullet), 1);
-
-            } else {
-
-                requestAnimationFrame(update);
-
-            }
-
-        }
-
-        requestAnimationFrame(update);
 
         return bullet;
 

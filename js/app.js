@@ -45,7 +45,19 @@ define(function (require) {
 
         this.clear();
 
+        world.update();
+
         this.addToStage(world.fetchAllEntities());
+
+    });
+
+    document.addEventListener('keydown', function (e) {
+
+        if (e.keyCode === 32) {
+
+            stage.stop();
+
+        }
 
     });
 

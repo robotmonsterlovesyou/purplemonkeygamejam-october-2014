@@ -23,6 +23,37 @@ define(function (require) {
     return {
         stage: null,
         entities: entities,
+        update: function () {
+
+            var array = [];
+
+            world.entities.players.forEach(function (entity) {
+
+                entity.update();
+
+            });
+
+            Object.keys(world.entities.factions).forEach(function (faction) {
+
+                world.entities.factions[faction].forEach(function (entity) {
+
+                    entity.update();
+
+                });
+
+            });
+
+            Object.keys(world.entities.bullets).forEach(function (faction) {
+
+                world.entities.bullets[faction].forEach(function (entity) {
+
+                    entity.update();
+
+                });
+
+            });
+
+        },
         fetchAllEntities: function () {
 
             var array = [];
