@@ -18,8 +18,7 @@ define(function (require) {
 
         }
 
-        var bullet,
-            interval;
+        var bullet;
 
         bullet = new Facade.Rect({
             x: pos.x,
