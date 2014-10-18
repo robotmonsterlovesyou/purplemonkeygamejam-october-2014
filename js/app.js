@@ -53,6 +53,10 @@ define(function (require) {
 
     document.addEventListener('keydown', function (e) {
 
+        if (e.metaKey) { return false; }
+
+        e.preventDefault();
+
         if (e.keyCode === 32) {
 
             if (stage._requestAnimation) {
