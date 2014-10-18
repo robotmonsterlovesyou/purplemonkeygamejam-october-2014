@@ -10,7 +10,7 @@ define(function (require) {
         world = require('entities/world'),
         playerEntity = require('entities/player'),
         npcEntity = require('entities/npc'),
-        player1 = new playerEntity({ x: stage.width() / 2, y: stage.height() / 2});
+        player1 = new playerEntity('team', { x: stage.width() / 2, y: stage.height() / 2});
 
     world.stage = stage;
 
@@ -18,7 +18,19 @@ define(function (require) {
 
     for (var i = 0; i < 10; i++) {
 
-        world.entities.npcs.enemies.push(new npcEntity('enemies', {
+        world.entities.factions.team.push(new npcEntity('team', {
+            x: Math.random() * stage.width(),
+            y: Math.random() * stage.height()
+        }, [
+            Math.floor(Math.random() * 2) === 1 ? 1 : -1,
+            Math.floor(Math.random() * 2) === 1 ? 1 : -1
+        ]));
+
+    }
+
+    for (var i = 0; i < 10; i++) {
+
+        world.entities.factions.enemies.push(new npcEntity('enemies', {
             x: Math.random() * stage.width(),
             y: Math.random() * stage.height()
         }, [
@@ -32,14 +44,14 @@ define(function (require) {
 
         this.clear();
 
-        this.addToStage(world.entities.players);
-
-        this.addToStage(world.entities.npcs.team);
-        this.addToStage(world.entities.npcs.enemies);
-
         this.addToStage(world.entities.bullets.player);
         this.addToStage(world.entities.bullets.team);
         this.addToStage(world.entities.bullets.enemies);
+
+        this.addToStage(world.entities.players);
+
+        this.addToStage(world.entities.factions.team);
+        this.addToStage(world.entities.factions.enemies);
 
     });
 

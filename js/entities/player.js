@@ -11,7 +11,7 @@ define(function (require) {
         bulletEntity = require('entities/bullet'),
         controls = new Gamepad();
 
-    return function (pos) {
+    return function (faction, pos) {
 
         if (!pos) {
 
@@ -19,11 +19,14 @@ define(function (require) {
 
         }
 
+        var player,
+            weaponCooldown = 0;
+
         var player = new Facade.Rect({
             x: pos.x,
             y: pos.y,
-            width: 10,
-            height: 10,
+            width: 15,
+            height: 15,
             fillStyle: 'red'
         });
 
@@ -83,6 +86,16 @@ define(function (require) {
 
             var bullet,
                 pos = player.getAllOptions();
+
+            if (weaponCooldown > 0) {
+
+                weaponCooldown -= .1;
+
+                return false;
+
+            }
+
+            weaponCooldown = .5;
 
             if (e.value[0] < -0.5) {
 

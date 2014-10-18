@@ -11,7 +11,7 @@ define(function (require) {
         bulletEntity = require('entities/bullet'),
         controls = new Gamepad();
 
-    return function (type, pos, direction) {
+    return function (faction, pos, direction) {
 
         if (!pos) {
 
@@ -26,6 +26,12 @@ define(function (require) {
             height: 10,
             fillStyle: 'green'
         });
+
+        if (faction === 'team') {
+
+            npc.setOptions({ fillStyle: 'purple' });
+
+        }
 
         require('facadejs-SATjs-plugin');
 
@@ -78,7 +84,7 @@ define(function (require) {
 
             if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height() || detectHit()) {
 
-                world.entities.npcs[type].splice(world.entities.npcs[type].indexOf(npc), 1);
+                world.entities.factions[faction].splice(world.entities.factions[faction].indexOf(npc), 1);
 
             } else {
 

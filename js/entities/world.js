@@ -10,7 +10,7 @@ define(function (require) {
         controls = new Gamepad(),
         entities = {
             players: [],
-            npcs: {
+            factions: {
                 team: [],
                 enemies: []
             },
