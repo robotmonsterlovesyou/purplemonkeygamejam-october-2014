@@ -5,25 +5,25 @@
             "speed": 10,
             "thrust": 2,
             "brake": 1.2
-            },
-        "sp_weapon": "weapon2"
         },
+        "sp_weapon": "weapon2"
+    },
     {
         "name": "Blue",
         "ability_base": {
             "speed": 9,
             "thrust": 1.7,
             "brake": 99
-            },
-        "sp_weapon": "weapon3"
         },
+        "sp_weapon": "weapon3"
+    },
     {
         "name": "Blue",
         "ability_base": {
             "speed": 13,
             "thrust": 1.5,
             "brake": 1
-            },
+        },
         "sp_weapon": "weapon3"
-        }
+    }
 ]
