@@ -86,21 +86,21 @@ define(function (require) {
 
             if (e.value[0] < -0.5) {
 
-                world.entities.push(new bulletEntity({ x: pos.x, y: pos.y }, e.value));
+                world.entities.bullets.player.push(new bulletEntity('player', { x: pos.x, y: pos.y }, e.value));
 
             } else if (e.value[0] > 0.5) {
 
-                world.entities.push(new bulletEntity({ x: pos.x, y: pos.y }, e.value));
+                world.entities.bullets.player.push(new bulletEntity('player', { x: pos.x, y: pos.y }, e.value));
 
             }
 
             if (e.value[1] < -0.5) {
 
-                world.entities.push(new bulletEntity({ x: pos.x, y: pos.y }, e.value));
+                world.entities.bullets.player.push(new bulletEntity('player', { x: pos.x, y: pos.y }, e.value));
 
             } else if (e.value[1] > 0.5) {
 
-                world.entities.push(new bulletEntity({ x: pos.x, y: pos.y }, e.value));
+                world.entities.bullets.player.push(new bulletEntity('player', { x: pos.x, y: pos.y }, e.value));
 
             }
 

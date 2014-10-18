@@ -8,7 +8,18 @@ define(function (require) {
     var Facade = require('facade'),
         Gamepad = require('gamepadjs'),
         controls = new Gamepad(),
-        entities = [];
+        entities = {
+            players: [],
+            npcs: {
+                team: [],
+                enemies: []
+            },
+            bullets: {
+                player: [],
+                team: [],
+                enemies: []
+            }
+        };
 
     return {
         stage: null,

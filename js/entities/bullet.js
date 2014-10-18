@@ -10,7 +10,7 @@ define(function (require) {
         world = require('entities/world'),
         controls = new Gamepad();
 
-    return function (pos, direction) {
+    return function (type, pos, direction) {
 
         if (!pos) {
 
@@ -61,7 +61,7 @@ define(function (require) {
 
             if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height()) {
 
-                world.entities.splice(world.entities.indexOf(bullet), 1);
+                world.entities.bullets[type].splice(world.entities.bullets[type].indexOf(bullet), 1);
 
             } else {
 
