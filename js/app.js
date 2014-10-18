@@ -60,4 +60,10 @@ define(function (require) {
 
     });
 
+    controls.on('release', 'stick_axis_left', function (e) {
+
+        player.Box2D('setVelocity', 0, 0);
+
+    })
+
 });
