@@ -27,9 +27,13 @@ define(function (require) {
 
             var array = [];
 
-            world.entities.players.forEach(function (entity) {
+            Object.keys(world.entities.bullets).forEach(function (faction) {
 
-                entity.update();
+                world.entities.bullets[faction].forEach(function (entity) {
+
+                    entity.update();
+
+                });
 
             });
 
@@ -43,13 +47,9 @@ define(function (require) {
 
             });
 
-            Object.keys(world.entities.bullets).forEach(function (faction) {
+            world.entities.players.forEach(function (entity) {
 
-                world.entities.bullets[faction].forEach(function (entity) {
-
-                    entity.update();
-
-                });
+                entity.update();
 
             });
 
