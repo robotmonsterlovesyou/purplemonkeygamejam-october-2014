@@ -15,7 +15,6 @@ define(function (require) {
                 enemies: []
             },
             bullets: {
-                player: [],
                 team: [],
                 enemies: []
             }
@@ -23,7 +22,40 @@ define(function (require) {
 
     return {
         stage: null,
-        entities: entities
+        entities: entities,
+        fetchAllEntities: function () {
+
+            var array = [];
+
+            world.entities.players.forEach(function (entity) {
+
+                array.push(entity.sprite);
+
+            });
+
+            Object.keys(world.entities.factions).forEach(function (faction) {
+
+                world.entities.factions[faction].forEach(function (entity) {
+
+                    array.push(entity.sprite);
+
+                });
+
+            });
+
+            Object.keys(world.entities.bullets).forEach(function (faction) {
+
+                world.entities.bullets[faction].forEach(function (entity) {
+
+                    array.push(entity.sprite);
+
+                });
+
+            });
+
+            return array;
+
+        }
     };
 
 });

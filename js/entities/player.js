@@ -19,42 +19,44 @@ define(function (require) {
 
         }
 
-        var player,
-            weaponCooldown = 0;
-
-        var player = new Facade.Rect({
-            x: pos.x,
-            y: pos.y,
-            width: 15,
-            height: 15,
-            fillStyle: 'red'
-        });
+        var player = {
+            sprite: new Facade.Rect({
+                x: pos.x,
+                y: pos.y,
+                width: 15,
+                height: 15,
+                fillStyle: 'red'
+            }),
+            velocity: 0,
+            direction: 0,
+            weaponCooldown: 0
+        };
 
         require('facadejs-SATjs-plugin');
 
-        player.SAT('setVector');
+        player.sprite.SAT('setVector');
 
         controls.on('hold', 'd_pad_left', function () {
 
-            player.setOptions({ x: '-=5' });
+            player.sprite.setOptions({ x: '-=5' });
 
         });
 
         controls.on('hold', 'd_pad_right', function () {
 
-            player.setOptions({ x: '+=5' });
+            player.sprite.setOptions({ x: '+=5' });
 
         });
 
         controls.on('hold', 'd_pad_up', function () {
 
-            player.setOptions({ y: '-=5' });
+            player.sprite.setOptions({ y: '-=5' });
 
         });
 
         controls.on('hold', 'd_pad_down', function () {
 
-            player.setOptions({ y: '+=5' });
+            player.sprite.setOptions({ y: '+=5' });
 
         });
 
@@ -85,35 +87,35 @@ define(function (require) {
         controls.on('hold', 'stick_axis_right', function (e) {
 
             var bullet,
-                pos = player.getAllOptions();
+                pos = player.sprite.getAllOptions();
 
-            if (weaponCooldown > 0) {
+            if (player.weaponCooldown > 0) {
 
-                weaponCooldown -= .1;
+                player.weaponCooldown -= .1;
 
                 return false;
 
             }
 
-            weaponCooldown = .5;
+            player.weaponCooldown = .5;
 
             if (e.value[0] < -0.5) {
 
-                world.entities.bullets.player.push(new bulletEntity('player', { x: pos.x, y: pos.y }, e.value));
+                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, e.value));
 
             } else if (e.value[0] > 0.5) {
 
-                world.entities.bullets.player.push(new bulletEntity('player', { x: pos.x, y: pos.y }, e.value));
+                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, e.value));
 
             }
 
             if (e.value[1] < -0.5) {
 
-                world.entities.bullets.player.push(new bulletEntity('player', { x: pos.x, y: pos.y }, e.value));
+                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, e.value));
 
             } else if (e.value[1] > 0.5) {
 
-                world.entities.bullets.player.push(new bulletEntity('player', { x: pos.x, y: pos.y }, e.value));
+                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, e.value));
 
             }
 

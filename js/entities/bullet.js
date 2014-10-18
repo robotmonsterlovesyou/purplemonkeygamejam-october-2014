@@ -20,17 +20,21 @@ define(function (require) {
 
         var bullet;
 
-        bullet = new Facade.Rect({
-            x: pos.x,
-            y: pos.y,
-            width: 5,
-            height: 5,
-            fillStyle: 'blue'
-        });
+        bullet = {
+            sprite: new Facade.Rect({
+                x: pos.x,
+                y: pos.y,
+                width: 5,
+                height: 5,
+                fillStyle: 'blue'
+            }),
+            velocity: 0,
+            direction: 0
+        };
 
         require('facadejs-SATjs-plugin');
 
-        bullet.SAT('setVector');
+        bullet.sprite.SAT('setVector');
 
         function update () {
 
@@ -39,25 +43,25 @@ define(function (require) {
 
             if (direction[0] > 0) {
 
-                bullet.setOptions({ x: '+=' + speed });
+                bullet.sprite.setOptions({ x: '+=' + speed });
 
             } else if (direction[0] < 0) {
 
-                bullet.setOptions({ x: '-=' + speed });
+                bullet.sprite.setOptions({ x: '-=' + speed });
 
             }
 
             if (direction[1] > 0) {
 
-                bullet.setOptions({ y: '+=' + speed });
+                bullet.sprite.setOptions({ y: '+=' + speed });
 
             } else if (direction[1] < 0) {
 
-                bullet.setOptions({ y: '-=' + speed });
+                bullet.sprite.setOptions({ y: '-=' + speed });
 
             }
 
-            pos = bullet.getAllOptions();
+            pos = bullet.sprite.getAllOptions();
 
             if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height()) {
 

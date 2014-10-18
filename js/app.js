@@ -45,14 +45,7 @@ define(function (require) {
 
         this.clear();
 
-        this.addToStage(world.entities.bullets.player);
-        this.addToStage(world.entities.bullets.team);
-        this.addToStage(world.entities.bullets.enemies);
-
-        this.addToStage(world.entities.players);
-
-        this.addToStage(world.entities.factions.team);
-        this.addToStage(world.entities.factions.enemies);
+        this.addToStage(world.fetchAllEntities());
 
     });
 

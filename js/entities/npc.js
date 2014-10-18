@@ -19,41 +19,28 @@ define(function (require) {
 
         }
 
-        var npc = new Facade.Rect({
-            x: pos.x,
-            y: pos.y,
-            width: 10,
-            height: 10,
-            fillStyle: 'green'
-        });
+        var npc = {
+            sprite: new Facade.Rect({
+                x: pos.x,
+                y: pos.y,
+                width: 10,
+                height: 10,
+                fillStyle: 'green'
+            }),
+            velocity: 0,
+            direction: 0,
+            weaponCooldown: 0
+        };
 
         if (faction === 'team') {
 
-            npc.setOptions({ fillStyle: 'purple' });
+            npc.sprite.setOptions({ fillStyle: 'purple' });
 
         }
 
         require('facadejs-SATjs-plugin');
 
-        npc.SAT('setVector');
-
-        function detectHit () {
-
-            var hit = false;
-
-            world.entities.bullets.player.forEach(function (bullet) {
-
-                if (npc.SAT('testCollision', bullet.SAT('getVector'))) {
-
-                    hit = true;
-
-                }
-
-            });
-
-            return hit;
-
-        }
+        npc.sprite.SAT('setVector');
 
         function update () {
 
@@ -62,27 +49,27 @@ define(function (require) {
 
             if (direction[0] > 0) {
 
-                npc.setOptions({ x: '+=' + speed });
+                npc.sprite.setOptions({ x: '+=' + speed });
 
             } else if (direction[0] < 0) {
 
-                npc.setOptions({ x: '-=' + speed });
+                npc.sprite.setOptions({ x: '-=' + speed });
 
             }
 
             if (direction[1] > 0) {
 
-                npc.setOptions({ y: '+=' + speed });
+                npc.sprite.setOptions({ y: '+=' + speed });
 
             } else if (direction[1] < 0) {
 
-                npc.setOptions({ y: '-=' + speed });
+                npc.sprite.setOptions({ y: '-=' + speed });
 
             }
 
-            pos = npc.getAllOptions();
+            pos = npc.sprite.getAllOptions();
 
-            if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height() || detectHit()) {
+            if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height()) {
 
                 world.entities.factions[faction].splice(world.entities.factions[faction].indexOf(npc), 1);
 
