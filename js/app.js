@@ -26,32 +26,6 @@ define(function (require) {
 
     });
 
-    controls.on('hold', 'stick_axis_left', function (e) {
-
-        var speed = 3;
-
-        if (e.value[0] < 0) {
-
-            player.setOptions({ x: '-=' + speed });
-
-        } else if (e.value[0]) {
-
-            player.setOptions({ x: '+=' + speed });
-
-        }
-
-        if (e.value[1] < 0) {
-
-            player.setOptions({ y: '-=' + speed });
-
-        } else if (e.value[1]) {
-
-            player.setOptions({ y: '+=' + speed });
-
-        }
-
-    });
-
     controls.on('hold', 'd_pad_left', function () {
 
         player.setOptions({ x: '-=5' });
