@@ -20,6 +20,27 @@ define(function (require) {
 
         var bullet;
 
+        function detectHit () {
+
+            var hit = false,
+                bulletVector = bullet.sprite.SAT('getVector');
+
+            world.entities.factions.enemies.forEach(function (npc) {
+
+                if (npc.sprite.SAT('testCollision', bulletVector)) {
+
+                    hit = true;
+
+                    npc.destory();
+
+                }
+
+            });
+
+            return hit;
+
+        }
+
         bullet = {
             sprite: new Facade.Rect({
                 x: pos.x,
@@ -37,34 +58,38 @@ define(function (require) {
             },
             update: function () {
 
-                var pos,
+                var pos = bullet.sprite.getAllOptions(),
                     speed = 5;
 
                 if (direction[0] > 0) {
 
-                    bullet.sprite.setOptions({ x: '+=' + speed });
+                    pos.x += speed;
 
                 } else if (direction[0] < 0) {
 
-                    bullet.sprite.setOptions({ x: '-=' + speed });
+                    pos.x -= speed;
 
                 }
 
                 if (direction[1] > 0) {
 
-                    bullet.sprite.setOptions({ y: '+=' + speed });
+                    pos.y += speed;
 
                 } else if (direction[1] < 0) {
 
-                    bullet.sprite.setOptions({ y: '-=' + speed });
+                    pos.y -= speed;
 
                 }
 
-                pos = bullet.sprite.getAllOptions();
-
-                if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height()) {
+                if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height() || detectHit()) {
 
                     bullet.destory();
+
+                } else {
+
+                    bullet.sprite.setOptions({ x: pos.x, y: pos.y });
+
+                    bullet.sprite.SAT('setVector');
 
                 }
 

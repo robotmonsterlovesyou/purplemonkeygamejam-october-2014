@@ -32,39 +32,43 @@ define(function (require) {
             weaponCooldown: 0,
             destory: function () {
 
-                world.entities.factions[faction].splice(world.entities.factions[faction].indexOf(bullet), 1);
+                world.entities.factions[faction].splice(world.entities.factions[faction].indexOf(npc), 1);
 
             },
             update: function () {
 
-                var pos,
+                var pos = npc.sprite.getAllOptions(),
                     speed = 1;
 
                 if (direction[0] > 0) {
 
-                    npc.sprite.setOptions({ x: '+=' + speed });
+                    pos.x += speed;
 
                 } else if (direction[0] < 0) {
 
-                    npc.sprite.setOptions({ x: '-=' + speed });
+                    pos.x -= speed;
 
                 }
 
                 if (direction[1] > 0) {
 
-                    npc.sprite.setOptions({ y: '+=' + speed });
+                    pos.y += speed;
 
                 } else if (direction[1] < 0) {
 
-                    npc.sprite.setOptions({ y: '-=' + speed });
+                    pos.y -= speed;
 
                 }
-
-                pos = npc.sprite.getAllOptions();
 
                 if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height()) {
 
                     world.entities.factions[faction].splice(world.entities.factions[faction].indexOf(npc), 1);
+
+                } else {
+
+                    npc.sprite.setOptions({ x: pos.x, y: pos.y });
+
+                    npc.sprite.SAT('setVector');
 
                 }
 
