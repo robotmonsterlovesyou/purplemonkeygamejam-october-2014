@@ -6,6 +6,7 @@ define(function (require) {
     'use strict';
 
     var Facade = require('facade'),
+        utils = require('utils'),
         stage = new Facade(document.querySelector('canvas')),
         world = require('entities/world'),
         playerEntity = require('entities/player'),
