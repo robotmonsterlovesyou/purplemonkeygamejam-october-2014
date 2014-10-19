@@ -13,7 +13,7 @@ define(function (require) {
 
         var npc = new shipEntity('npcs', type, pos, direction);
 
-        npc.sightDistance = 300;
+        npc.sightDistance = 200;
         npc.closestEnemy = null,
         npc.closestDistance = {
             mag: 9999999999,
@@ -60,7 +60,7 @@ define(function (require) {
             // move and fire toward them
             var vector = Utils.polarToCart(1, npc.closestDistance.dir);
             npc.updateMove(vector.x, vector.y);
-            if (npc.closestDistance.mag < npc.sightDistance || Math.abs(npc.closestDistance.dir - npc.velocity.dir) > 0.01) {
+            if (npc.closestDistance.mag < npc.sightDistance) {//} || Math.abs(npc.closestDistance.dir - npc.velocity.dir) > 0.05) {
                 npc.updateWeapon(vector.x, vector.y);
             }
         };
