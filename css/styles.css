@@ -12,6 +12,7 @@ html, body {
 body {
     background: url('../images/starfield.png');
     background-position: 0px 0px;
+    -webkit-transition: all .5s;
 }
 
 canvas {
