@@ -38,6 +38,8 @@ define(function (require) {
 
                     hit = true;
 
+                    new sfx('sfx/explosion.ogg').volume(.8).play();
+
                     npc.destroy();
 
                 }
