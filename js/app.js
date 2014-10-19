@@ -24,9 +24,6 @@ define(function (require) {
         world.entities.factions.team.push(new npcEntity('team', {
             x: Math.random() * stage.width(),
             y: Math.random() * stage.height()
-        }, {
-            mag: Math.floor(Math.random() * 2) === 1 ? 1 : -1,
-            dir: Math.random() * 2 * Math.PI
         }));
 
     }
@@ -36,9 +33,6 @@ define(function (require) {
         world.entities.factions.enemies.push(new npcEntity('enemies', {
             x: Math.random() * stage.width(),
             y: Math.random() * stage.height()
-        }, {
-            mag: Math.floor(Math.random() * 2) === 1 ? 1 : -1,
-            dir: Math.random() * 2 * Math.PI
         }));
 
     }

@@ -6,6 +6,7 @@ define(function (require) {
     'use strict';
 
     var Facade = require('facade'),
+        Utils = require('utils'),
         camera = require('entities/camera'),
         entityEntity = require('entities/entity');
 
@@ -23,30 +24,18 @@ define(function (require) {
             fillStyle: 'green'
         }));
 
+        npc.velocity = {
+            mag: Math.floor(Math.random() * 2) === 1 ? 1 : -1,
+            dir: Math.random() * 2 * Math.PI
+        };
+
         npc.update = function () {
 
-            var pos = this.sprite.getAllOptions(),
-                speed = 1;
-
-            if (direction[0] > 0) {
-
-                pos.x += speed;
-
-            } else if (direction[0] < 0) {
-
-                pos.x -= speed;
-
-            }
-
-            if (direction[1] > 0) {
-
-                pos.y += speed;
-
-            } else if (direction[1] < 0) {
-
-                pos.y -= speed;
-
-            }
+            var move = Utils.polarToCart(this.velocity.mag, this.velocity.dir),
+                newPos = {
+                    x: this.sprite.getOption('x') + move.x,
+                    y: this.sprite.getOption('y') + move.y
+                };
 
             if (!camera.isVisible(npc)) {
 
@@ -54,7 +43,10 @@ define(function (require) {
 
             } else {
 
-                npc.sprite.setOptions({ x: pos.x, y: pos.y });
+                this.sprite.setOptions({
+                    x: newPos.x,
+                    y: newPos.y
+                });
 
                 npc.sprite.SAT('setVector');
 
