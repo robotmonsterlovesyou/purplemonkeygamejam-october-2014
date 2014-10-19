@@ -27,7 +27,7 @@ define(function (require) {
 
                 for (var i = 0, length = levelData.npcs[key].maxCount; i < length; i++) {
 
-                    world.entities.factions[key].push(new npcEntity(key, {
+                    world.entities.npcs[key].push(new npcEntity(key, {
                         x: Math.random() * world.stage.width(),
                         y: Math.random() * world.stage.height()
                     }));

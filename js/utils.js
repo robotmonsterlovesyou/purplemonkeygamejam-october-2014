@@ -59,19 +59,19 @@ define(function (require) {
 
         cartToPolar: function (x, y) {
 
-            var radius = Math.sqrt(x * x + y * y),
-                angle = x === 0 ? Math.PI / 2 * (y / Math.abs(y)) : Math.atan(y / x);
+            var mag = Math.sqrt(x * x + y * y),
+                dir = x === 0 ? Math.PI / 2 * (y / Math.abs(y)) : Math.atan(y / x);
             if (x < 0) {
-                angle += Math.PI;
+                dir += Math.PI;
             } else if(y < 0) {
-                angle += Math.PI * 2;
+                dir += Math.PI * 2;
             }
-            return { radius: radius, angle: angle };
+            return { mag: mag, dir: dir };
         },
 
-        polarToCart: function (radius, angle) {
+        polarToCart: function (mag, dir) {
 
-            return { x: radius * Math.cos(angle), y: radius * Math.sin(angle) };
+            return { x: mag * Math.cos(dir), y: mag * Math.sin(dir) };
         },
 
         // performance.now() shim --------------------------------------------------

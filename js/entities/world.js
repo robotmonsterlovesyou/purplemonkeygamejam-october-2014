@@ -7,7 +7,7 @@ define(function (require) {
 
     var entities = {
             players: [],
-            factions: {
+            npcs: {
                 team: [],
                 enemies: []
             },
@@ -51,9 +51,9 @@ define(function (require) {
 
             });
 
-            Object.keys(entities.factions).forEach(function (key) {
+            Object.keys(entities.npcs).forEach(function (key) {
 
-                entities.factions[key].forEach(function (entity) {
+                entities.npcs[key].forEach(function (entity) {
 
                     entity.update();
 
@@ -105,9 +105,9 @@ define(function (require) {
 
             });
 
-            Object.keys(entities.factions).forEach(function (key) {
+            Object.keys(entities.npcs).forEach(function (key) {
 
-                entities.factions[key].forEach(function (entity) {
+                entities.npcs[key].forEach(function (entity) {
 
                     array.push(entity.sprite);
 

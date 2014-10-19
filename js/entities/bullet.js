@@ -33,8 +33,8 @@ define(function (require) {
         }));
 
         bullet.velocity = {
-            mag: bulletVelP.radius,
-            dir: bulletVelP.angle,
+            mag: bulletVelP.mag,
+            dir: bulletVelP.dir,
         };
 
         bullet.expiration = Utils.performanceNow() + expiration;
@@ -44,7 +44,7 @@ define(function (require) {
             var hit = false,
                 bulletVector = this.sprite.SAT('getVector');
 
-            world.entities.factions.enemies.forEach(function (npc) {
+            world.entities.npcs.enemies.forEach(function (npc) {
 
                 if (npc.sprite.SAT('testCollision', bulletVector)) {
 
