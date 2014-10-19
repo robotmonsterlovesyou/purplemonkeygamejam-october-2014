@@ -7,6 +7,7 @@ define(function (require) {
 
     var Facade = require('facade'),
         world = require('entities/world'),
+        camera = require('entities/camera'),
         entity = function () {
 
             this.sprite = new Facade.Rect({
@@ -40,7 +41,7 @@ define(function (require) {
 
     entity.prototype.update = function () {
 
-        if (!camera.isVisible(bullet)) {
+        if (!camera.isVisible(this)) {
 
             this.destroy();
 
