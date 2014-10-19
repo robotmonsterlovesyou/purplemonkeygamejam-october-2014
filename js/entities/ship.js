@@ -21,7 +21,7 @@ define(function (require) {
 
         var ship = new entityEntity(type, subtype);
 
-        ship.type = type;
+        ship.subtype = subtype;
         ship.velocity = {
             mag: Math.random() * 2,
             dir: Math.random() * 2 * Math.PI
@@ -155,7 +155,7 @@ define(function (require) {
                 }
                 if (this.weapon.lastFired + this.weapon.cooldown < Utils.performanceNow()) {
                     this.weapon.lastFired = Utils.performanceNow();
-                    world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, this.weapon.dir, this.velocity, 1500));
+                    world.entities.bullets[this.subtype].push(new bulletEntity(this.subtype, { x: pos.x, y: pos.y }, this.weapon.dir, this.velocity, 1500));
                 }
             }
 

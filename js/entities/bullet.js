@@ -14,9 +14,9 @@ define(function (require) {
 
     require('facadejs-SATjs-plugin');
 
-    return function (type, pos, direction, shipVel, expiration) {
+    return function (subtype, pos, direction, shipVel, expiration) {
 
-        var bullet = new entityEntity('bullets', type),
+        var bullet = new entityEntity('bullets', subtype),
             shipVelC = Utils.polarToCart(shipVel.mag, shipVel.dir),
             bulletVelC = Utils.polarToCart(7, direction),
             bulletVelP = Utils.cartToPolar(shipVelC.x + bulletVelC.x, shipVelC.y + bulletVelC.y),
@@ -46,7 +46,7 @@ define(function (require) {
 
             Object.keys(world.entities.npcs).forEach(function (key) {
 
-                if (key !== type) {
+                if (key !== subtype) {
 
                     world.entities.npcs[key].forEach(function (npc) {
 
