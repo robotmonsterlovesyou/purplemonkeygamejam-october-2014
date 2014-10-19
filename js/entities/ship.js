@@ -22,16 +22,18 @@ define(function (require) {
         var ship = new entityEntity(type, subtype);
 
         ship.subtype = subtype;
+
+        ship.ability_base = world.activeState.data.npcs[subtype].ability_base;
         ship.velocity = {
             mag: Math.random() * 2,
             dir: Math.random() * 2 * Math.PI
         };
-        ship.speed = 5;
-        ship.thrust = 0.2;
+        ship.topSpeed = 0;
+        ship.thrust = 0;
         ship.weapon = {
             dir: ship.velocity.dir,
-            torque: 0.3,
-            cooldown: 200,
+            torque: 0,
+            cooldown: 0,
             lastFired: 0
         };
 
@@ -117,7 +119,7 @@ define(function (require) {
 
             if (stickVelP.mag > stickThreshold) {
                 // apply thrust multiplier, then convert back to cartesian for vector addition
-                stickVelP.mag *= this.thrust;
+                stickVelP.mag *= this.thrust + this.ability_base.thrust;
                 stickVelC = Utils.polarToCart(stickVelP.mag, stickVelP.dir);
                 entityVelC = Utils.polarToCart(this.velocity.mag, this.velocity.dir);
                 // then store final velocity in polar
@@ -125,8 +127,8 @@ define(function (require) {
                 this.velocity.mag = finalVelP.mag;
                 this.velocity.dir = finalVelP.dir;
             }
-            if (this.velocity.mag > this.speed){
-                this.velocity.mag = this.speed
+            if (this.velocity.mag > this.topSpeed + this.ability_base.topSpeed){
+                this.velocity.mag = this.topSpeed + this.ability_base.topSpeed
             }
 
         };
@@ -146,14 +148,14 @@ define(function (require) {
             }
             // weapon movement is limited by torque ability
             if (stickVel.mag > stickThreshold) {
-                if (Math.abs(diff) < this.weapon.torque) {
+                if (Math.abs(diff) < this.weapon.torque + this.ability_base.weapon_torque) {
                     this.weapon.dir = stickVel.dir;
                 } else if (diff < 0) {
-                    this.weapon.dir += this.weapon.torque;
+                    this.weapon.dir += this.weapon.torque + this.ability_base.weapon_torque;
                 } else {
-                    this.weapon.dir -= this.weapon.torque;
+                    this.weapon.dir -= this.weapon.torque + this.ability_base.weapon_torque;
                 }
-                if (this.weapon.lastFired + this.weapon.cooldown < Utils.performanceNow()) {
+                if (this.weapon.lastFired + this.weapon.cooldown + this.ability_base.weapon_cooldown < Utils.performanceNow()) {
                     this.weapon.lastFired = Utils.performanceNow();
                     world.entities.bullets[this.subtype].push(new bulletEntity(this.subtype, { x: pos.x, y: pos.y }, this.weapon.dir, this.velocity, 1500));
                 }

@@ -29,7 +29,7 @@ define(function (require) {
             lineJoin: 'round',
             anchor: 'top',
             rotate: direction * 180 / Math.PI,
-            fillStyle: world.activeState.data.npcs[subtype].sprite.fillStyle
+            fillStyle: world.activeState.data.npcs[subtype].sprite.strokeStyle
         }));
 
         bullet.velocity = {

@@ -5,6 +5,12 @@
             "sprite": {
                 "fillStyle": "hsla(293, 100%, 50%, 0.65)",
                 "strokeStyle": "hsl(293, 100%, 50%)"
+            },
+            "ability_base": {
+                "topSpeed": 3,
+                "thrust": 0.2,
+                "weapon_torque": 0.3,
+                "weapon_cooldown": 200
             }
         },
         "enemies": {
@@ -12,6 +18,25 @@
             "sprite": {
                 "fillStyle": "hsla(106, 100%, 50%, 0.65)",
                 "strokeStyle": "hsl(106, 100%, 50%)"
+            },
+            "ability_base": {
+                "topSpeed": 3,
+                "thrust": 0.2,
+                "weapon_torque": 0.3,
+                "weapon_cooldown": 200
+            }
+        },
+        "orange": {
+            "maxCount": 10,
+            "sprite": {
+                "fillStyle": "hsla(32, 100%, 50%, 0.65)",
+                "strokeStyle": "hsl(32, 100%, 50%)"
+            },
+            "ability_base": {
+                "topSpeed": 3,
+                "thrust": 0.2,
+                "weapon_torque": 0.3,
+                "weapon_cooldown": 200
             }
         }
     }
