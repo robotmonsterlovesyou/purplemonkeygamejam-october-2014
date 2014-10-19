@@ -14,7 +14,8 @@ define(function (require) {
             bullets: {
                 team: [],
                 enemies: []
-            }
+            },
+            particles: []
         };
 
     return {
@@ -26,9 +27,9 @@ define(function (require) {
 
             var array = [];
 
-            Object.keys(entities.bullets).forEach(function (faction) {
+            Object.keys(entities.bullets).forEach(function (key) {
 
-                entities.bullets[faction].forEach(function (entity) {
+                entities.bullets[key].forEach(function (entity) {
 
                     entity.update();
 
@@ -36,9 +37,9 @@ define(function (require) {
 
             });
 
-            Object.keys(entities.factions).forEach(function (faction) {
+            Object.keys(entities.factions).forEach(function (key) {
 
-                entities.factions[faction].forEach(function (entity) {
+                entities.factions[key].forEach(function (entity) {
 
                     entity.update();
 
@@ -52,21 +53,21 @@ define(function (require) {
 
             });
 
+            entities.particles.forEach(function (entity) {
+
+                entity.update();
+
+            });
+
         },
 
         fetchAllEntities: function () {
 
             var array = [];
 
-            entities.players.forEach(function (entity) {
+            Object.keys(entities.bullets).forEach(function (key) {
 
-                array.push(entity.sprite);
-
-            });
-
-            Object.keys(entities.factions).forEach(function (faction) {
-
-                entities.factions[faction].forEach(function (entity) {
+                entities.bullets[key].forEach(function (entity) {
 
                     array.push(entity.sprite);
 
@@ -74,9 +75,25 @@ define(function (require) {
 
             });
 
-            Object.keys(entities.bullets).forEach(function (faction) {
+            Object.keys(entities.factions).forEach(function (key) {
 
-                entities.bullets[faction].forEach(function (entity) {
+                entities.factions[key].forEach(function (entity) {
+
+                    array.push(entity.sprite);
+
+                });
+
+            });
+
+            entities.players.forEach(function (entity) {
+
+                array.push(entity.sprite);
+
+            });
+
+            entities.particles.forEach(function (set) {
+
+                set.particles.forEach(function (entity) {
 
                     array.push(entity.sprite);
 
