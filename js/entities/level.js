@@ -17,9 +17,13 @@ define(function (require) {
 
     return function (uri) {
 
-        var level = {};
+        var level = {
+            data: null
+        };
 
         $.get(uri).done(function (levelData) {
+
+            level.data = levelData;
 
             world.entities.players.push(new playerEntity('team', { x: world.stage.width() / 2, y: world.stage.height() / 2}));
 

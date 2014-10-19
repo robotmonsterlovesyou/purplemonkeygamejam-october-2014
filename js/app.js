@@ -20,6 +20,8 @@ define(function (require) {
 
     level1 = new levelEntity('data/levels/level1.json');
 
+    world.activeState = level1;
+
     stage.draw(function () {
 
         this.clear();

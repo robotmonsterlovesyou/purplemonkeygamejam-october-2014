@@ -26,6 +26,7 @@ define(function (require) {
 
         stage: null,
         entities: entities,
+        activeState: null,
 
         update: function () {
 

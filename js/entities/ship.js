@@ -8,6 +8,7 @@ define(function (require) {
     var Facade = require('facade'),
         Utils = require('utils'),
         sfx = require('sfx'),
+        world = require('entities/world'),
         camera = require('entities/camera'),
         entityEntity = require('entities/entity'),
         bulletEntity = require('entities/bullet'),
@@ -36,23 +37,14 @@ define(function (require) {
 
         ship.setSprite(new Facade.Polygon({
             points: [[0,0], [24, 12], [0, 24]],
-            fillStyle: 'hsla(106, 100%, 50%, 0.65)',
+            fillStyle: world.activeState.data[type][subtype].sprite.fillStyle,
             lineWidth: 2,
-            strokeStyle: 'hsl(106, 100%, 50%)',
+            // strokeStyle: world.activeState.data[type][subtype].sprite.strokeStyle,
             anchor: 'center',
             x: pos.x,
             y: pos.y,
             rotate: ship.velocity.dir * 180 / Math.PI
         }));
-
-        if (faction === 'team') {
-
-            ship.sprite.setOptions({
-                fillStyle: 'hsla(293, 100%, 50%, 0.65)',
-                strokeStyle: 'hsl(293, 100%, 50%)'
-            });
-
-        }
 
         ship.detectHit = function () {
 
