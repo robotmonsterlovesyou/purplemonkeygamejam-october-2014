@@ -10,7 +10,7 @@
                 "topSpeed": 3,
                 "thrust": 0.2,
                 "weapon_torque": 0.3,
-                "weapon_cooldown": 200
+                "weapon_cooldown": 170
             }
         },
         "enemies": {
@@ -20,8 +20,8 @@
                 "strokeStyle": "hsl(106, 100%, 50%)"
             },
             "ability_base": {
-                "topSpeed": 3,
-                "thrust": 0.2,
+                "topSpeed": 3.5,
+                "thrust": 0.15,
                 "weapon_torque": 0.3,
                 "weapon_cooldown": 200
             }
@@ -33,10 +33,10 @@
                 "strokeStyle": "hsl(32, 100%, 50%)"
             },
             "ability_base": {
-                "topSpeed": 3,
-                "thrust": 0.2,
-                "weapon_torque": 0.3,
-                "weapon_cooldown": 200
+                "topSpeed": 2,
+                "thrust": 0.8,
+                "weapon_torque": 0.8,
+                "weapon_cooldown": 100
             }
         }
     }
