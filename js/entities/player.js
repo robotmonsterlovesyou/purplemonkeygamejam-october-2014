@@ -141,7 +141,7 @@ define(function (require) {
                 player.weapon.cooldown -= .1;
             } else if (stickVel.radius > stickThreshold) {
                 player.weapon.cooldown = .5;
-                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, player.weapon.dir));
+                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, player.weapon.dir, player.velocity));
             }
 
         });

@@ -11,7 +11,7 @@ define(function (require) {
         world = require('entities/world'),
         controls = new Gamepad();
 
-    return function (faction, pos, direction) {
+    return function (faction, pos, direction, shipVel) {
 
         if (!pos) {
 
@@ -19,7 +19,10 @@ define(function (require) {
 
         }
 
-        var bullet;
+        var bullet,
+            shipVelC = Utils.polarToCart(shipVel.mag, shipVel.dir),
+            bulletVelC = Utils.polarToCart(7, direction),
+            bulletVelP = Utils.cartToPolar(shipVelC.x + bulletVelC.x, shipVelC.y + bulletVelC.y);
 
         function detectHit () {
 
@@ -42,6 +45,7 @@ define(function (require) {
 
         }
 
+
         bullet = {
             sprite: new Facade.Rect({
                 x: pos.x,
@@ -53,8 +57,8 @@ define(function (require) {
                 fillStyle: 'blue'
             }),
             velocity: {
-                mag: 5,
-                dir: direction,
+                mag: bulletVelP.radius,
+                dir: bulletVelP.angle,
             },
             destory: function () {
 
