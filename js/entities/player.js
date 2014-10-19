@@ -1,97 +1,65 @@
 /*jslint browser: true */
-/*globals Facade, Gamepad, $ */
+/*globals Facade */
 
 define(function (require) {
 
     'use strict';
 
     var Facade = require('facade'),
+        Utils = require('utils'),
+        sfx = require('sfx'),
         Gamepad = require('gamepadjs'),
         Utils = require('utils'),
         world = require('entities/world'),
+        entityEntity = require('entities/entity'),
         bulletEntity = require('entities/bullet'),
         controls = new Gamepad();
 
-    return function (faction, pos) {
+    require('facadejs-SATjs-plugin');
 
-        if (!pos) {
+    return function (faction, pos, direction, shipVel) {
 
-            pos = { x: 0, y: 0 };
+        var player = new entityEntity('players', 0),
+            stickThreshold = 0.3;
 
-        }
+        player.setSprite(new Facade.Polygon({
+            points: [[0,0], [32, 16], [0, 32]],
+            fillStyle: '',
+            lineWidth: 2,
+            strokeStyle: 'rgb(255, 255, 255)',
+            anchor: 'center',
+            x: pos.x,
+            y: pos.y
+        }));
 
-        var stickThreshold = 0.3;
-
-        var player = {
-            sprite: new Facade.Polygon({
-                points: [[0,0], [32, 16], [0, 32]],
-                fillStyle: '',
-                lineWidth: 2,
-                strokeStyle: 'rgb(255, 255, 255)',
-                anchor: 'center',
-                x: pos.x,
-                y: pos.y
-            }),
-            velocity: {
-                mag: 0,
-                dir: 0
-            },
-            faction: faction,
-            speed: 5,         // move to faction code later
-            thrust: 0.2,      // move to faction code later
-            weapon: {
-                dir: 0,
-                torque: 0.3,    // move to faction code later
-                cooldown: 0,
-            },
-            destroy: function () {
-
-                world.entities.players.splice(world.entities.players.indexOf(player), 1);
-
-            },
-            update: function () {
-
-                var move = Utils.polarToCart(this.velocity.mag, this.velocity.dir),
-                    newPos = {
-                        x: this.sprite.getOption('x') + move.x,
-                        y: this.sprite.getOption('y') + move.y
-                    };
-
-                this.sprite.setOptions({
-                    x: newPos.x,
-                    y: newPos.y,
-                    rotate: this.weapon.dir * 180 / Math.PI
-                });
-            }
+        player.velocity = {
+            mag: 0,
+            dir: 0
         };
 
-        require('facadejs-SATjs-plugin');
+        player.speed = 5;
+        player.thrust = 0.2;
+        player.weapon = {
+            dir: 0,
+            torque: 0.3,
+            cooldown: 0
+        };
 
-        player.sprite.SAT('setVector');
+        player.update = function () {
 
-        controls.on('hold', 'd_pad_left', function () {
+            var move = Utils.polarToCart(this.velocity.mag, this.velocity.dir),
+                newPos = {
+                    x: this.sprite.getOption('x') + move.x,
+                    y: this.sprite.getOption('y') + move.y
+                };
 
-            player.sprite.setOptions({ x: '-=5' });
+            this.sprite.setOptions({
+                x: newPos.x,
+                y: newPos.y,
+                rotate: this.weapon.dir * 180 / Math.PI
+            });
 
-        });
-
-        controls.on('hold', 'd_pad_right', function () {
-
-            player.sprite.setOptions({ x: '+=5' });
-
-        });
-
-        controls.on('hold', 'd_pad_up', function () {
-
-            player.sprite.setOptions({ y: '-=5' });
-
-        });
-
-        controls.on('hold', 'd_pad_down', function () {
-
-            player.sprite.setOptions({ y: '+=5' });
-
-        });
+        };
 
         controls.on('hold', 'stick_axis_left', function (e) {
 
