@@ -43,9 +43,16 @@ define(function (require) {
 
                 for (var i = 0, length = levelData.npcs[key].maxCount; i < length; i++) {
 
+                    var pos;
+                    do {
+                        pos = {
+                            x: Math.random() * world.stage.width(),
+                            y: Math.random() * world.stage.height()
+                        };
+                    } while (pos.x < world.stage.width() * 2/3 && pos.x > world.stage.width() * 1/3 && pos.y < world.stage.height() * 2/3 && pos.y > world.stage.height() * 1/3);
                     world.entities.npcs[key].push(new npcEntity(key, {
-                        x: Math.random() * world.stage.width(),
-                        y: Math.random() * world.stage.height()
+                        x: pos.x,
+                        y: pos.y
                     }));
 
                 }
