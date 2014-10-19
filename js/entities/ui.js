@@ -31,8 +31,8 @@ define(function (require) {
 
         update: function () {
 
-            cache.lives.setText(cache.lives.value.replace(/[0-9]+/, stats.lives));
-            cache.score.setText(cache.score.value.replace(/[0-9]+/, ++stats.score));
+            cache.lives.setText(cache.lives.value.replace(/[\-0-9]+/, stats.lives));
+            cache.score.setText(cache.score.value.replace(/[\-0-9]+/, ++stats.score));
 
         }
 
