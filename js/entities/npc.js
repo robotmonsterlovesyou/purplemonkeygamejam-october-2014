@@ -47,7 +47,7 @@ define(function (require) {
                         var distance = npc.getDistance(entity);
                         //console.log(npc.closestDistance.mag, distance.mag);
                         if (npc.closestDistance.mag > distance.mag) {
-                            console.log('c');
+                            //console.log('c');
                             npc.closestEnemy = entity;
                             npc.closestDistance = distance;
                         }
