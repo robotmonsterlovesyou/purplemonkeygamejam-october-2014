@@ -31,9 +31,28 @@ define(function (require) {
 
         collectible.expiration = Utils.performanceNow() + expiration;
 
+        collectible.detectHit = function () {
+
+            var hit = false,
+                collectibleVector = this.sprite.SAT('getVector');
+
+            world.entities.players.forEach(function (player) {
+
+                if (player.sprite.SAT('testCollision', collectibleVector)) {
+
+                    hit = true;
+
+                }
+
+            });
+
+            return hit;
+
+        };
+
         collectible.update = function () {
 
-            if (this.expiration < Utils.performanceNow()) {
+            if (this.expiration < Utils.performanceNow() || this.detectHit()) {
 
                 collectible.destroy();
 
