@@ -23,9 +23,9 @@ define(function (require) {
 
         npc.setSprite(new Facade.Polygon({
             points: [[0,0], [24, 12], [0, 24]],
-            fillStyle: 'green',
+            fillStyle: 'hsla(106, 100%, 50%, 0.65)',
             lineWidth: 2,
-            strokeStyle: 'rgb(255, 255, 255)',
+            strokeStyle: 'hsl(106, 100%, 50%)',
             anchor: 'center',
             x: pos.x,
             y: pos.y,
@@ -61,7 +61,10 @@ define(function (require) {
 
         if (faction === 'team') {
 
-            npc.sprite.setOptions({ fillStyle: 'purple' });
+            npc.sprite.setOptions({
+                fillStyle: 'hsla(293, 100%, 50%, 0.65)',
+                strokeStyle: 'hsl(293, 100%, 50%)'
+            });
 
         }
 
