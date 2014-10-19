@@ -36,7 +36,7 @@ define(function (require) {
             var hit = false,
                 collectibleVector = this.sprite.SAT('getVector');
 
-            world.entities.players.forEach(function (player) {
+            world.activeState.players.forEach(function (player) {
 
                 if (player.sprite.SAT('testCollision', collectibleVector)) {
 

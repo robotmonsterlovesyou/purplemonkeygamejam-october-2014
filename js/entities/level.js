@@ -18,14 +18,17 @@ define(function (require) {
     return function (uri) {
 
         var level = {
-            data: null
+            data: null,
+            players: []
         };
 
         $.get(uri).done(function (levelData) {
 
             level.data = levelData;
 
-            world.entities.npcs.team.push(new playerEntity('team', { x: world.stage.width() / 2, y: world.stage.height() / 2}));
+            level.players.push(new playerEntity('team', { x: world.stage.width() / 2, y: world.stage.height() / 2}));
+
+            world.entities.npcs.team.push(level.players[0]);
 
             Object.keys(levelData.npcs).forEach(function (key) {
 
