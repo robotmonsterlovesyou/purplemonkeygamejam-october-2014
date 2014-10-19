@@ -33,7 +33,7 @@ define(function (require) {
 
         collectible.update = function () {
 
-            if ((expiration < Utils.performanceNow())) {
+            if (this.expiration < Utils.performanceNow()) {
 
                 collectible.destroy();
 
