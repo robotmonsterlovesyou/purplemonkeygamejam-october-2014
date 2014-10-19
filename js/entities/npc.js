@@ -7,6 +7,7 @@ define(function (require) {
 
     var Facade = require('facade'),
         Gamepad = require('gamepadjs'),
+        sfx = require('sfx'),
         world = require('entities/world'),
         bulletEntity = require('entities/bullet'),
         controls = new Gamepad();
@@ -19,7 +20,10 @@ define(function (require) {
 
         }
 
-        var npc = {
+        var npc,
+            explosionSFX = new sfx('sfx/explosion.ogg');
+
+        npc = {
             sprite: new Facade.Rect({
                 x: pos.x,
                 y: pos.y,
@@ -31,6 +35,8 @@ define(function (require) {
             direction: 0,
             weaponCooldown: 0,
             destory: function () {
+
+                explosionSFX.play();
 
                 world.entities.factions[faction].splice(world.entities.factions[faction].indexOf(npc), 1);
 

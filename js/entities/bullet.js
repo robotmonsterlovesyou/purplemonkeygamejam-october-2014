@@ -97,7 +97,7 @@ define(function (require) {
 
         bullet.sprite.SAT('setVector');
 
-        bulletSFX.play();
+        bulletSFX.play(.5);
 
         return bullet;
 

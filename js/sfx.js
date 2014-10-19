@@ -11,9 +11,15 @@ define(function (require) {
 
     }
 
-    SFX.prototype.play = function () {
+    SFX.prototype.play = function (volume) {
 
         this.audio.play();
+
+        if (volume !== undefined) {
+
+            this.audio.volume = volume;
+
+        }
 
     }
 
