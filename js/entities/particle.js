@@ -8,7 +8,7 @@ define(function (require) {
     var Facade = require('facade'),
         Utils = require('utils'),
 
-        particleGenerator = function (pos) {
+        particleGenerator = function (type, pos) {
 
             var r;
 
@@ -20,7 +20,7 @@ define(function (require) {
                     y: pos.y,
                     radius: 10,
                     fillStyle: '',
-                    strokeStyle: '#f00',
+                    strokeStyle: world.activeState.data.npcs[type].sprite.fillStyle,
                     lineWidth: 1,
                     anchor: 'center',
                     setLineDash: [[1, 2]]
@@ -65,9 +65,9 @@ define(function (require) {
 
     };
 
-    return function (pos) {
+    return function (type, pos) {
 
-        return new particleGenerator(pos);
+        return new particleGenerator(type, pos);
 
     }
 
