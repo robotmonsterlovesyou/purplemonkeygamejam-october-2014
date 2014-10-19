@@ -89,9 +89,9 @@ define(function (require) {
 
     });
 
-    return function (type, pos, direction, shipVel) {
+    return function (type, pos, direction) {
 
-        var player = new shipEntity('npcs', type, pos, direction, shipVel);
+        var player = new shipEntity('npcs', type, pos, direction);
 
         player.setSprite(new Facade.Polygon({
             points: [[0,0], [24, 12], [0, 24]],
