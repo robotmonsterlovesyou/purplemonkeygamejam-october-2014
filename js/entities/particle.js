@@ -14,21 +14,18 @@ define(function (require) {
 
             this.particles = [];
 
-            for (r = 0; r < 360; r = r + 15) {
-
-                this.particles.push({
-                    spread: 0,
-                    r: r,
-                    sprite: new Facade.Circle({
-                        x: pos.x + Math.cos(r),
-                        y: pos.y + Math.sin(r),
-                        radius: 3,
-                        fillStyle: '#f00',
-                        opacity: 100
-                    })
-                });
-
-            }
+            this.particles.push({
+                sprite: new Facade.Circle({
+                    x: pos.x,
+                    y: pos.y,
+                    radius: 10,
+                    fillStyle: '',
+                    strokeStyle: '#f00',
+                    lineWidth: 1,
+                    anchor: 'center',
+                    setLineDash: [[1, 2]]
+                })
+            });
 
         };
 
@@ -46,8 +43,9 @@ define(function (require) {
 
             var options = particle.sprite.getAllOptions();
 
-            particle.spread += .05;
-            options.opacity -= .5;
+            options.scale += .2;
+            options.radius += .05;
+            options.opacity -= 2;
 
             if (options.opacity < 0) {
 
@@ -56,8 +54,8 @@ define(function (require) {
             } else {
 
                 particle.sprite.setOptions({
-                    x: options.x + particle.spread * Math.cos(particle.r),
-                    y: options.y + particle.spread * Math.sin(particle.r),
+                    scale: options.scale,
+                    radius: options.radius,
                     opacity: options.opacity
                 });
 
