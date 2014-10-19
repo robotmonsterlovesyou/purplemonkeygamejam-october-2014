@@ -24,10 +24,10 @@ define(function (require) {
         world.entities.factions.team.push(new npcEntity('team', {
             x: Math.random() * stage.width(),
             y: Math.random() * stage.height()
-        }, [
-            Math.floor(Math.random() * 2) === 1 ? 1 : -1,
-            Math.floor(Math.random() * 2) === 1 ? 1 : -1
-        ]));
+        }, {
+            mag: Math.floor(Math.random() * 2) === 1 ? 1 : -1,
+            dir: Math.random() * 2 * Math.PI
+        }));
 
     }
 
@@ -36,12 +36,60 @@ define(function (require) {
         world.entities.factions.enemies.push(new npcEntity('enemies', {
             x: Math.random() * stage.width(),
             y: Math.random() * stage.height()
-        }, [
-            Math.floor(Math.random() * 2) === 1 ? 1 : -1,
-            Math.floor(Math.random() * 2) === 1 ? 1 : -1
-        ]));
+        }, {
+            mag: Math.floor(Math.random() * 2) === 1 ? 1 : -1,
+            dir: Math.random() * 2 * Math.PI
+        }));
 
     }
+
+    // music stuff
+
+    var audioContext = new AudioContext();
+    var bgMusic;
+
+    function fetchAudio (url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'arraybuffer';
+        xhr.onload = function () {
+            callback(xhr.response);
+        };
+        xhr.send();
+    }
+    function decodeAudio (arrayBuffer, callback) {
+        audioContext.decodeAudioData(arrayBuffer, function(audioBuffer) {
+            callback(audioBuffer)   ;
+        });
+    }
+
+    function playAudio (audioBuffer, delay) {
+        bgMusic = audioContext.createBufferSource();
+        bgMusic.buffer = audioBuffer;
+        bgMusic.loop = true;
+        bgMusic.connect(audioContext.destination);
+        bgMusic.start(audioContext.currentTime + delay);
+    console.log(audioContext.currentTime);
+    }
+
+    function playBgMusic (bgFile, delay) {
+        stopBgMusic(delay);
+        var bgBuffer = fetchAudio(bgFile, function( arrayBuffer ) {
+        decodeAudio(arrayBuffer, function( audioBuffer ) {
+            playAudio(audioBuffer, delay);
+        });
+    });
+    }
+
+    function stopBgMusic (delay) {
+        if (bgMusic !== undefined) {
+            bgMusic.stop(audioContext.currentTime + delay);
+        }
+    }
+
+    playBgMusic('sfx/bg1.ogg', 0);
+
+    // end music stuff
 
     stage.draw(function () {
 
@@ -63,12 +111,13 @@ define(function (require) {
 
             if (stage._requestAnimation) {
 
-                stage.stop();
+                stage.stop(0);
+                stopBgMusic(0);
 
             } else {
 
-                stage.start();
-
+                stage.start(0);
+                playBgMusic('sfx/bg1.ogg', 0);
             }
 
         }
