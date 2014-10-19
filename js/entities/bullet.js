@@ -8,6 +8,7 @@ define(function (require) {
     var Facade = require('facade'),
         Gamepad = require('gamepadjs'),
         Utils = require('utils'),
+        buzz = require('buzz'),
         world = require('entities/world'),
         controls = new Gamepad();
 
@@ -22,7 +23,8 @@ define(function (require) {
         var bullet,
             shipVelC = Utils.polarToCart(shipVel.mag, shipVel.dir),
             bulletVelC = Utils.polarToCart(7, direction),
-            bulletVelP = Utils.cartToPolar(shipVelC.x + bulletVelC.x, shipVelC.y + bulletVelC.y);
+            bulletVelP = Utils.cartToPolar(shipVelC.x + bulletVelC.x, shipVelC.y + bulletVelC.y),
+            bulletSFX = new buzz.sound('sfx/laser.ogg');
 
         function detectHit () {
 
@@ -44,7 +46,6 @@ define(function (require) {
             return hit;
 
         }
-
 
         bullet = {
             sprite: new Facade.Rect({
@@ -79,7 +80,7 @@ define(function (require) {
                     rotate: this.velocity.dir * 180 / Math.PI
                 });
 
-                if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height() || detectHit()) {
+                if (newPos.x < 0 || newPos.x > world.stage.width() || newPos.y < 0 || newPos.y > world.stage.height() || detectHit()) {
 
                     bullet.destory();
 
@@ -95,6 +96,8 @@ define(function (require) {
         require('facadejs-SATjs-plugin');
 
         bullet.sprite.SAT('setVector');
+
+        bulletSFX.play();
 
         return bullet;
 
