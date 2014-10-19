@@ -79,7 +79,7 @@ define(function (require) {
 
             new sfx('sfx/explosion.ogg').volume(.8).play();
 
-            //world.entities.particles.push(new particleEntity(this.sprite.getAllOptions()));
+            world.entities.particles.push(new particleEntity(this.sprite.getAllOptions()));
             world.entities.collectibles[subtype].push(new collectibleEntity(subtype, this.sprite.getAllOptions()));
 
             this.__proto__.destroy.call(this);
