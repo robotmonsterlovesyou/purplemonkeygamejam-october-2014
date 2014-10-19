@@ -4,7 +4,8 @@ require.config({
         'facade': '../bower_components/facade.js/facade.min',
         'facadejs-SATjs-plugin': '../bower_components/facadejs-SATjs-plugin/facadejs-SAT',
         'gamepadjs': '../bower_components/gamepad.js/gamepad.min',
-        'jquery': '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min'
+        'jquery': '//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min',
+        'buzz': '//cdnjs.cloudflare.com/ajax/libs/buzz/1.1.0/buzz.min'
     },
     'shim': {
         'sat-js': {
