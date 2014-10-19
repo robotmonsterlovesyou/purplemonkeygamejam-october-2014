@@ -19,16 +19,21 @@ define(function (require) {
 
         var level = {
             data: null,
-            players: []
+            players: [],
+            spawnPlayer: function (id) {
+
+                level.players.push(new playerEntity('team', { x: world.stage.width() / 2, y: world.stage.height() / 2}));
+
+                world.entities.npcs.team.push(level.players[id]);
+
+            }
         };
 
         $.get(uri).done(function (levelData) {
 
             level.data = levelData;
 
-            level.players.push(new playerEntity('team', { x: world.stage.width() / 2, y: world.stage.height() / 2}));
-
-            world.entities.npcs.team.push(level.players[0]);
+            level.spawnPlayer(0);
 
             Object.keys(levelData.npcs).forEach(function (key) {
 
