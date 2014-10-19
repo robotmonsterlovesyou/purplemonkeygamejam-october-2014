@@ -1,1 +1,18 @@
-{}
+{
+    "npcs": {
+        "team": {
+            "maxCount": 10,
+            "sprite": {
+                "fillStyle": "hsla(293, 100%, 50%, 0.65)",
+                "strokeStyle": "hsl(293, 100%, 50%)"
+            }
+        },
+        "enemies": {
+            "maxCount": 20,
+            "sprite": {
+                "fillStyle": "hsla(106, 100%, 50%, 0.65)",
+                "strokeStyle": "hsl(106, 100%, 50%)"
+            }
+        }
+    }
+}
