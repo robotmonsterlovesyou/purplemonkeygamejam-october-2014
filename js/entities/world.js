@@ -5,10 +5,7 @@ define(function (require) {
 
     'use strict';
 
-    var Facade = require('facade'),
-        Gamepad = require('gamepadjs'),
-        controls = new Gamepad(),
-        entities = {
+    var entities = {
             players: [],
             factions: {
                 team: [],
@@ -21,25 +18,17 @@ define(function (require) {
         };
 
     return {
+
         stage: null,
         entities: entities,
+
         update: function () {
 
             var array = [];
 
-            Object.keys(world.entities.bullets).forEach(function (faction) {
+            Object.keys(entities.bullets).forEach(function (faction) {
 
-                world.entities.bullets[faction].forEach(function (entity) {
-
-                    entity.update();
-
-                });
-
-            });
-
-            Object.keys(world.entities.factions).forEach(function (faction) {
-
-                world.entities.factions[faction].forEach(function (entity) {
+                entities.bullets[faction].forEach(function (entity) {
 
                     entity.update();
 
@@ -47,26 +36,37 @@ define(function (require) {
 
             });
 
-            world.entities.players.forEach(function (entity) {
+            Object.keys(entities.factions).forEach(function (faction) {
+
+                entities.factions[faction].forEach(function (entity) {
+
+                    entity.update();
+
+                });
+
+            });
+
+            entities.players.forEach(function (entity) {
 
                 entity.update();
 
             });
 
         },
+
         fetchAllEntities: function () {
 
             var array = [];
 
-            world.entities.players.forEach(function (entity) {
+            entities.players.forEach(function (entity) {
 
                 array.push(entity.sprite);
 
             });
 
-            Object.keys(world.entities.factions).forEach(function (faction) {
+            Object.keys(entities.factions).forEach(function (faction) {
 
-                world.entities.factions[faction].forEach(function (entity) {
+                entities.factions[faction].forEach(function (entity) {
 
                     array.push(entity.sprite);
 
@@ -74,9 +74,9 @@ define(function (require) {
 
             });
 
-            Object.keys(world.entities.bullets).forEach(function (faction) {
+            Object.keys(entities.bullets).forEach(function (faction) {
 
-                world.entities.bullets[faction].forEach(function (entity) {
+                entities.bullets[faction].forEach(function (entity) {
 
                     array.push(entity.sprite);
 
@@ -87,6 +87,7 @@ define(function (require) {
             return array;
 
         }
+
     };
 
 });
