@@ -44,7 +44,7 @@ define(function (require) {
                 torque: 0.3,    // move to faction code later
                 cooldown: 0,
             },
-            destory: function () {
+            destroy: function () {
 
                 world.entities.players.splice(world.entities.players.indexOf(player), 1);
 

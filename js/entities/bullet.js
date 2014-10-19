@@ -38,7 +38,7 @@ define(function (require) {
 
                     hit = true;
 
-                    npc.destory();
+                    npc.destroy();
 
                 }
 
@@ -62,7 +62,7 @@ define(function (require) {
                 mag: bulletVelP.radius,
                 dir: bulletVelP.angle,
             },
-            destory: function () {
+            destroy: function () {
 
                 world.entities.bullets[faction].splice(world.entities.bullets[faction].indexOf(bullet), 1);
 
@@ -83,7 +83,7 @@ define(function (require) {
 
                 if (!camera.isVisible(bullet) || detectHit()) {
 
-                    bullet.destory();
+                    bullet.destroy();
 
                 } else {
 
