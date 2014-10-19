@@ -10,20 +10,21 @@ define(function (require) {
         sfx = require('sfx'),
         camera = require('entities/camera'),
         entityEntity = require('entities/entity'),
-        particleEntity = require('entities/particle');
+        particleEntity = require('entities/particle'),
+        collectibleEntity = require('entities/collectible');
 
     require('facadejs-SATjs-plugin');
 
     return function (faction, pos, direction) {
 
-        var npc = new entityEntity('factions', faction);
+        var ship = new entityEntity('factions', faction);
 
-        npc.velocity = {
+        ship.velocity = {
             mag: Math.floor(Math.random() * 2) === 1 ? 1 : -1,
             dir: Math.random() * 2 * Math.PI
         };
 
-        npc.setSprite(new Facade.Polygon({
+        ship.setSprite(new Facade.Polygon({
             points: [[0,0], [24, 12], [0, 24]],
             fillStyle: 'hsla(106, 100%, 50%, 0.65)',
             lineWidth: 2,
@@ -31,10 +32,19 @@ define(function (require) {
             anchor: 'center',
             x: pos.x,
             y: pos.y,
-            rotate: npc.velocity.dir * 180 / Math.PI
+            rotate: ship.velocity.dir * 180 / Math.PI
         }));
 
-        npc.detectHit = function () {
+        if (faction === 'team') {
+
+            ship.sprite.setOptions({
+                fillStyle: 'hsla(293, 100%, 50%, 0.65)',
+                strokeStyle: 'hsl(293, 100%, 50%)'
+            });
+
+        }
+
+        ship.detectHit = function () {
 
             var hit = false,
                 npcVector = this.sprite.SAT('getVector');
@@ -63,17 +73,18 @@ define(function (require) {
 
         };
 
-        npc.destroy = function () {
+        ship.destroy = function () {
 
             new sfx('sfx/explosion.ogg').volume(.8).play();
 
             world.entities.particles.push(new particleEntity(this.sprite.getAllOptions()));
+            world.entities.collectibles[faction].push(new collectibleEntity(faction, this.sprite.getAllOptions()));
 
             this.__proto__.destroy.call(this);
 
         }
 
-        npc.update = function () {
+        ship.update = function () {
 
             var move = Utils.polarToCart(this.velocity.mag, this.velocity.dir),
                 newPos = {
@@ -81,7 +92,7 @@ define(function (require) {
                     y: this.sprite.getOption('y') + move.y
                 };
 
-            if (!camera.isVisible(npc) || this.detectHit()) {
+            if (!camera.isVisible(ship) || this.detectHit()) {
 
                 this.destroy();
 
@@ -92,22 +103,13 @@ define(function (require) {
                     y: newPos.y
                 });
 
-                npc.sprite.SAT('setVector');
+                ship.sprite.SAT('setVector');
 
             }
 
         };
 
-        if (faction === 'team') {
-
-            npc.sprite.setOptions({
-                fillStyle: 'hsla(293, 100%, 50%, 0.65)',
-                strokeStyle: 'hsl(293, 100%, 50%)'
-            });
-
-        }
-
-        return npc;
+        return ship;
 
     }
 
