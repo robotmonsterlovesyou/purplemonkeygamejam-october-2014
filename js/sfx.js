@@ -11,18 +11,22 @@ define(function (require) {
 
     }
 
-    SFX.prototype.play = function (volume) {
+    SFX.prototype.play = function () {
 
         this.audio.play();
 
-        if (volume !== undefined) {
-
-            this.audio.volume = volume;
-
-        }
+        return this;
 
     }
 
-    return SFX
+    SFX.prototype.volume = function (volume) {
+
+        this.audio.volume = parseFloat(volume);
+
+        return this;
+
+    }
+
+    return SFX;
 
 });

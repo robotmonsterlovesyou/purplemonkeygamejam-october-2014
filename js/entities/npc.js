@@ -21,7 +21,7 @@ define(function (require) {
         }
 
         var npc,
-            explosionSFX = new sfx('sfx/explosion.ogg');
+            explosionSFX = new sfx('sfx/explosion.ogg').volume(.8);
 
         npc = {
             sprite: new Facade.Rect({

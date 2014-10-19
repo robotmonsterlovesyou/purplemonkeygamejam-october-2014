@@ -24,7 +24,7 @@ define(function (require) {
             shipVelC = Utils.polarToCart(shipVel.mag, shipVel.dir),
             bulletVelC = Utils.polarToCart(7, direction),
             bulletVelP = Utils.cartToPolar(shipVelC.x + bulletVelC.x, shipVelC.y + bulletVelC.y),
-            bulletSFX = new sfx('sfx/laser.ogg');
+            bulletSFX = new sfx('sfx/laser.ogg').volume(.5);
 
         function detectHit () {
 
@@ -97,7 +97,7 @@ define(function (require) {
 
         bullet.sprite.SAT('setVector');
 
-        bulletSFX.play(.5);
+        bulletSFX.play();
 
         return bullet;
 
