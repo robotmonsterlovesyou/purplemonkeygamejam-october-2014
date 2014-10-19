@@ -44,13 +44,21 @@ define(function (require) {
             var hit = false,
                 bulletVector = this.sprite.SAT('getVector');
 
-            world.entities.npcs.enemies.forEach(function (npc) {
+            Object.keys(world.entities.npcs).forEach(function (key) {
 
-                if (npc.sprite.SAT('testCollision', bulletVector)) {
+                if (key !== type) {
 
-                    hit = true;
+                    world.entities.npcs[key].forEach(function (npc) {
 
-                    npc.destroy();
+                        if (npc.sprite.SAT('testCollision', bulletVector)) {
+
+                            hit = true;
+
+                            npc.destroy();
+
+                        }
+
+                    });
 
                 }
 
