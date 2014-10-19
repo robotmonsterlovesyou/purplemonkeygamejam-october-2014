@@ -13,7 +13,8 @@ define(function (require) {
         camera = require('entities/camera'),
         ui = require('entities/ui'),
         shipEntity = require('entities/ship'),
-        controls = new Gamepad();
+        controls = new Gamepad(),
+        stickThreshold = 0.3;
 
     require('facadejs-SATjs-plugin');
 
@@ -29,8 +30,6 @@ define(function (require) {
     });
 
     controls.on('hold', 'key_a', function (e) {
-
-        console.log(world.activeState.players);
 
         world.activeState.players[0].updateMove(-1, 0);
 
@@ -92,10 +91,7 @@ define(function (require) {
 
     return function (type, pos, direction, shipVel) {
 
-        console.log('new player');
-
-        var player = new shipEntity('npcs', type, pos, direction, shipVel),
-            stickThreshold = 0.3;
+        var player = new shipEntity('npcs', type, pos, direction, shipVel);
 
         player.setSprite(new Facade.Polygon({
             points: [[0,0], [24, 12], [0, 24]],
