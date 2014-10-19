@@ -47,6 +47,66 @@ define(function (require) {
 
         };
 
+        controls.setCustomMapping('keyboard', {
+
+            'key_a': 65,
+            'key_w': 87,
+            'key_s': 83,
+            'key_d': 68,
+            'd_pad_left': 37,
+            'd_pad_right': 39,
+            'd_pad_up': 38,
+            'd_pad_down': 40
+        });
+
+        controls.on('hold', 'key_a', function (e) {
+
+            player.updateMove(-1, 0);
+
+        });
+
+        controls.on('hold', 'key_d', function (e) {
+
+            player.updateMove(1, 0);
+
+        });
+
+        controls.on('hold', 'key_w', function (e) {
+
+            player.updateMove(0, -1);
+
+        });
+
+        controls.on('hold', 'key_s', function (e) {
+
+            player.updateMove(0, 1);
+
+        });
+
+        controls.on('hold', 'd_pad_left', function (e) {
+
+            player.updateWeapon(-1, 0);
+
+        });
+
+        controls.on('hold', 'd_pad_right', function (e) {
+
+            player.updateWeapon(1, 0);
+
+        });
+
+        controls.on('hold', 'd_pad_up', function (e) {
+
+            player.updateWeapon(0, -1);
+
+        });
+
+        controls.on('hold', 'd_pad_down', function (e) {
+
+            player.updateWeapon(0, 1);
+
+        });
+
         controls.on('hold', 'stick_axis_left', function (e) {
 
             player.updateMove(e.value[0], e.value[1], stickThreshold);
