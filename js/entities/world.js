@@ -7,17 +7,11 @@ define(function (require) {
 
     var entities = {
             npcs: {
-                team: [],
-                enemies: []
             },
             bullets: {
-                team: [],
-                enemies: []
             },
             particles: [],
             collectibles: {
-                team: [],
-                enemies: []
             }
         };
 

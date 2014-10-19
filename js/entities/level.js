@@ -22,7 +22,9 @@ define(function (require) {
             players: [],
             spawnPlayer: function (id) {
 
-                level.players.push(new playerEntity('team', { x: world.stage.width() / 2, y: world.stage.height() / 2}));
+                level.players.push(new playerEntity('team', { x: world.stage.width() / 2, y: world.stage.height() / 2}, {
+
+                }));
 
                 world.entities.npcs.team.push(level.players[id]);
 
@@ -33,9 +35,11 @@ define(function (require) {
 
             level.data = levelData;
 
-            level.spawnPlayer(0);
-
             Object.keys(levelData.npcs).forEach(function (key) {
+
+                world.entities.npcs[key] = [];
+                world.entities.bullets[key] = [];
+                world.entities.collectibles[key] = [];
 
                 for (var i = 0, length = levelData.npcs[key].maxCount; i < length; i++) {
 
@@ -47,6 +51,8 @@ define(function (require) {
                 }
 
             });
+
+            level.spawnPlayer(0);
 
         });
 
