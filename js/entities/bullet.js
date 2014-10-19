@@ -7,6 +7,7 @@ define(function (require) {
 
     var Facade = require('facade'),
         Gamepad = require('gamepadjs'),
+        Utils = require('utils'),
         world = require('entities/world'),
         controls = new Gamepad();
 
@@ -47,10 +48,14 @@ define(function (require) {
                 y: pos.y,
                 width: 5,
                 height: 5,
+                anchor: 'center',
+                rotate: direction * 180 / Math.PI,
                 fillStyle: 'blue'
             }),
-            velocity: 0,
-            direction: 0,
+            velocity: {
+                mag: 5,
+                dir: direction,
+            },
             destory: function () {
 
                 world.entities.bullets[faction].splice(world.entities.bullets[faction].indexOf(bullet), 1);
@@ -58,10 +63,18 @@ define(function (require) {
             },
             update: function () {
 
-                var pos = bullet.sprite.getAllOptions(),
-                    speed = 5;
+                var move = Utils.polarToCart(this.velocity.mag, this.velocity.dir),
+                    newPos = {
+                        x: this.sprite.getOption('x') + move.x,
+                        y: this.sprite.getOption('y') + move.y
+                    };
 
-                if (direction[0] > 0) {
+                this.sprite.setOptions({
+                    x: newPos.x,
+                    y: newPos.y,
+                    rotate: this.velocity.dir * 180 / Math.PI
+                });
+                /*if (direction[0] > 0) {
 
                     pos.x += speed;
 
@@ -79,15 +92,15 @@ define(function (require) {
 
                     pos.y -= speed;
 
-                }
+                }*/
+
+                //bullet.sprite.setOptions({ x: pos.x + move.x, y: pos.y + move.y});
 
                 if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height() || detectHit()) {
 
                     bullet.destory();
 
                 } else {
-
-                    bullet.sprite.setOptions({ x: pos.x, y: pos.y });
 
                     bullet.sprite.SAT('setVector');
 

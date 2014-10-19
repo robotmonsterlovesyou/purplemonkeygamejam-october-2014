@@ -25,17 +25,20 @@ define(function (require) {
         var player = {
             sprite: new Facade.Image('images/player.png', {
                 anchor: 'center',
-                scale: 0.5
+                scale: 0.5,
+                x: pos.x,
+                y: pos.y
             }),
             velocity: {
                 mag: 0,
                 dir: 0
             },
             faction: faction,
-            speed: 5, // move to faction code later
-            thrust: 0.2, // move to faction code later
+            speed: 5,         // move to faction code later
+            thrust: 0.2,      // move to faction code later
             weapon: {
                 dir: 0,
+                torque: 0.3,    // move to faction code later
                 cooldown: 0,
             },
             destory: function () {
@@ -103,7 +106,6 @@ define(function (require) {
                 playerVelC = Utils.polarToCart(player.velocity.mag, player.velocity.dir);
                 // then store final velocity in polar
                 finalVelP = Utils.cartToPolar(stickVelC.x + playerVelC.x, stickVelC.y + playerVelC.y);
-console.log(stickVelP, stickVelC, playerVelC, finalVelP);
                 player.velocity.mag = finalVelP.radius;
                 player.velocity.dir = finalVelP.angle;
             }
@@ -115,43 +117,32 @@ console.log(stickVelP, stickVelC, playerVelC, finalVelP);
 
         controls.on('hold', 'stick_axis_right', function (e) {
 
-            var bullet,
-                pos = player.sprite.getAllOptions(),
-                stickVel = Utils.cartToPolar(e.value[0], e.value[1]);
+            var pos = player.sprite.getAllOptions(),
+                stickVel = Utils.cartToPolar(e.value[0], e.value[1]),
+                diff = player.weapon.dir - stickVel.angle;
 
+            if (diff > Math.PI) {
+                diff -= Math.PI * 2;
+            }
+            if (diff < -Math.PI) {
+                diff += Math.PI * 2;
+            }
+            // weapon movement is limited by torque ability
             if (stickVel.radius > stickThreshold) {
-                player.weapon.dir = stickVel.angle;
+                if (Math.abs(diff) < player.weapon.torque) {
+                    player.weapon.dir = stickVel.angle;
+                } else if (diff < 0) {
+                    player.weapon.dir += player.weapon.torque;
+                } else {
+                    player.weapon.dir -= player.weapon.torque;
+                }
             }
             if (player.weapon.cooldown > 0) {
                 player.weapon.cooldown -= .1;
-                return false;
+            } else if (stickVel.radius > stickThreshold) {
+                player.weapon.cooldown = .5;
+                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, player.weapon.dir));
             }
-
-            player.weapon.cooldown = .5;
-            if (stickVel.radius > stickThreshold) {
-
-                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, e.value));
-            }
-/*
-            if (e.value[0] < -0.5) {
-
-                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, e.value));
-
-            } else if (e.value[0] > 0.5) {
-
-                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, e.value));
-
-            }
-
-            if (e.value[1] < -0.5) {
-
-                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, e.value));
-
-            } else if (e.value[1] > 0.5) {
-
-                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, e.value));
-
-            }*/
 
         });
 

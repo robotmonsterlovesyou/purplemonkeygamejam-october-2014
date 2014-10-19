@@ -3,17 +3,17 @@
         "name": "Red",
         "ability_base": {
             "speed": 10,
-            "thrust": 2,
-            "brake": 1.2
+            "thrust": 0.5,
+            "weapon_torque": 1
         },
         "sp_weapon": "weapon2"
     },
     {
         "name": "Blue",
         "ability_base": {
-            "speed": 9,
+            "speed": 8,
             "thrust": 1.7,
-            "brake": 99
+            "weapon_torque": 1
         },
         "sp_weapon": "weapon3"
     },
@@ -21,8 +21,8 @@
         "name": "Blue",
         "ability_base": {
             "speed": 13,
-            "thrust": 1.5,
-            "brake": 1
+            "thrust": 0.2,
+            "weapon_torque": 1
         },
         "sp_weapon": "weapon3"
     }
