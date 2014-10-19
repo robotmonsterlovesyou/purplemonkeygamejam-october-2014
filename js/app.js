@@ -40,12 +40,15 @@ define(function (require) {
 
             if (stage._requestAnimation) {
 
-                stage.stop(0);
-                stopBgMusic(0);
+                stage.stop();
+
+                bgMusic.stop();
 
             } else {
 
-                stage.start(0);
+                stage.start();
+
+                bgMusic.start();
             }
 
         }

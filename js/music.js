@@ -56,7 +56,21 @@ define(function (require) {
 
         // end music stuff
 
-        return bgMusic;
+        return {
+
+            start: function () {
+
+                playBgMusic(url, 0.5, 0);
+
+            },
+
+            stop: function () {
+
+                stopBgMusic(0);
+
+            }
+
+        };
 
     };
 
