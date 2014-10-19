@@ -10,8 +10,7 @@ define(function (require) {
         sfx = require('sfx'),
         world = require('entities/world'),
         camera = require('entities/camera'),
-        entityEntity = require('entities/entity'),
-        particleEntity = require('entities/particle');
+        entityEntity = require('entities/entity');
 
     require('facadejs-SATjs-plugin');
 
@@ -48,10 +47,6 @@ define(function (require) {
                 if (npc.sprite.SAT('testCollision', bulletVector)) {
 
                     hit = true;
-
-                    new sfx('sfx/explosion.ogg').volume(.8).play();
-
-                    world.entities.particles.push(new particleEntity(npc.sprite.getAllOptions()));
 
                     npc.destroy();
 

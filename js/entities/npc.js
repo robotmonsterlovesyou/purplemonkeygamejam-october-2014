@@ -7,8 +7,10 @@ define(function (require) {
 
     var Facade = require('facade'),
         Utils = require('utils'),
+        sfx = require('sfx'),
         camera = require('entities/camera'),
-        entityEntity = require('entities/entity');
+        entityEntity = require('entities/entity'),
+        particleEntity = require('entities/particle');
 
     require('facadejs-SATjs-plugin');
 
@@ -32,7 +34,44 @@ define(function (require) {
             rotate: npc.velocity.dir * 180 / Math.PI
         }));
 
+        npc.detectHit = function () {
 
+            var hit = false,
+                npcVector = this.sprite.SAT('getVector');
+
+            Object.keys(world.entities.factions).forEach(function (key) {
+
+                if (key !== faction) {
+
+                    world.entities.factions[key].forEach(function (enemyNpc) {
+
+                        if (enemyNpc.sprite.SAT('testCollision', npcVector)) {
+
+                            hit = true;
+
+                            enemyNpc.destroy();
+
+                        }
+
+                    });
+
+                }
+
+            });
+
+            return hit;
+
+        };
+
+        npc.destroy = function () {
+
+            new sfx('sfx/explosion.ogg').volume(.8).play();
+
+            world.entities.particles.push(new particleEntity(this.sprite.getAllOptions()));
+
+            this.__proto__.destroy.call(this);
+
+        }
 
         npc.update = function () {
 
@@ -42,7 +81,7 @@ define(function (require) {
                     y: this.sprite.getOption('y') + move.y
                 };
 
-            if (!camera.isVisible(npc)) {
+            if (!camera.isVisible(npc) || this.detectHit()) {
 
                 this.destroy();
 
