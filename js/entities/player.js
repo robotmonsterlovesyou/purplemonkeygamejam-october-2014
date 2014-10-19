@@ -153,6 +153,23 @@ define(function (require) {
 
         };
 
+        player.switchTeams = function (newType) {
+
+            var temp;
+
+            if (type !== newType) {
+
+                temp = world.entities.npcs[type].splice(world.entities.npcs[type].indexOf(this), 1);
+                world.entities.npcs[newType].push(temp[0]);
+
+                this.sprite.setOptions({
+                    fillStyle: world.activeState.data.npcs[newType].sprite.fillStyle
+                });
+
+            }
+
+        };
+
         return player;
 
     }

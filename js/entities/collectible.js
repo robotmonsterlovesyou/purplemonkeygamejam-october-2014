@@ -44,6 +44,8 @@ define(function (require) {
 
                     hit = true;
 
+                    // player.switchTeams(type);
+
                 }
 
             });
