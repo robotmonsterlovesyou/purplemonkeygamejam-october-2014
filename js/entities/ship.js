@@ -21,7 +21,7 @@ define(function (require) {
 
         var ship = new entityEntity(type, subtype);
 
-        ship.faction = faction;
+        ship.type = type;
         ship.velocity = {
             mag: Math.random() * 2,
             dir: Math.random() * 2 * Math.PI
@@ -39,7 +39,7 @@ define(function (require) {
             points: [[0,0], [24, 12], [0, 24]],
             fillStyle: world.activeState.data[type][subtype].sprite.fillStyle,
             lineWidth: 2,
-            // strokeStyle: world.activeState.data[type][subtype].sprite.strokeStyle,
+            strokeStyle: world.activeState.data[type][subtype].sprite.strokeStyle,
             anchor: 'center',
             x: pos.x,
             y: pos.y,
