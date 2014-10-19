@@ -23,9 +23,12 @@ define(function (require) {
         var stickThreshold = 0.3;
 
         var player = {
-            sprite: new Facade.Image('images/player.png', {
+            sprite: new Facade.Polygon({
+                points: [[0,0], [32, 16], [0, 32]],
+                fillStyle: '',
+                lineWidth: 2,
+                strokeStyle: 'rgb(255, 255, 255)',
                 anchor: 'center',
-                scale: 0.5,
                 x: pos.x,
                 y: pos.y
             }),
