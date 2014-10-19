@@ -11,6 +11,7 @@ define(function (require) {
         Gamepad = require('gamepadjs'),
         Utils = require('utils'),
         world = require('entities/world'),
+        camera = require('entities/camera'),
         entityEntity = require('entities/entity'),
         bulletEntity = require('entities/bullet'),
         controls = new Gamepad();
@@ -58,6 +59,8 @@ define(function (require) {
                 y: newPos.y,
                 rotate: this.weapon.dir * 180 / Math.PI
             });
+
+            camera.followEntity(this);
 
         };
 
