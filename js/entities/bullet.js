@@ -74,27 +74,6 @@ define(function (require) {
                     y: newPos.y,
                     rotate: this.velocity.dir * 180 / Math.PI
                 });
-                /*if (direction[0] > 0) {
-
-                    pos.x += speed;
-
-                } else if (direction[0] < 0) {
-
-                    pos.x -= speed;
-
-                }
-
-                if (direction[1] > 0) {
-
-                    pos.y += speed;
-
-                } else if (direction[1] < 0) {
-
-                    pos.y -= speed;
-
-                }*/
-
-                //bullet.sprite.setOptions({ x: pos.x + move.x, y: pos.y + move.y});
 
                 if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height() || detectHit()) {
 
