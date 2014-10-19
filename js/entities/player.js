@@ -46,7 +46,7 @@ define(function (require) {
             },
             destory: function () {
 
-                world.entities.players.splice(world.entities.players.indexOf(bullet), 1);
+                world.entities.players.splice(world.entities.players.indexOf(player), 1);
 
             },
             update: function () {
