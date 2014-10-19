@@ -15,7 +15,11 @@ define(function (require) {
                 team: [],
                 enemies: []
             },
-            particles: []
+            particles: [],
+            collectibles: {
+                team: [],
+                enemies: []
+            }
         };
 
     return {
@@ -26,6 +30,16 @@ define(function (require) {
         update: function () {
 
             var array = [];
+
+            Object.keys(entities.collectibles).forEach(function (key) {
+
+                entities.collectibles[key].forEach(function (entity) {
+
+                    entity.update();
+
+                });
+
+            });
 
             Object.keys(entities.bullets).forEach(function (key) {
 
@@ -59,11 +73,27 @@ define(function (require) {
 
             });
 
+            entities.particles.forEach(function (entity) {
+
+                entity.update();
+
+            });
+
         },
 
         fetchAllEntities: function () {
 
             var array = [];
+
+            Object.keys(entities.collectibles).forEach(function (key) {
+
+                entities.collectibles[key].forEach(function (entity) {
+
+                    array.push(entity.sprite);
+
+                });
+
+            });
 
             Object.keys(entities.bullets).forEach(function (key) {
 
