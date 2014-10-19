@@ -9,9 +9,9 @@ define(function (require) {
         shipEntity = require('entities/ship'),
         world = require('entities/world');
 
-    return function (faction, pos, direction) {
+    return function (type, pos, direction) {
 
-        var npc = new shipEntity('npcs', faction, pos, direction);
+        var npc = new shipEntity('npcs', type, pos, direction);
 
         npc.sightDistance = 300;
         npc.closestEnemy = null,
@@ -42,7 +42,7 @@ define(function (require) {
 
                 world.entities.npcs[key].forEach(function (entity) {
 
-                    if (entity !== npc && entity.faction !== npc.faction) {
+                    if (entity !== npc && entity.type !== npc.type) {
                         var distance = npc.getDistance(entity);
                         //console.log(closestDistance.mag, distance.mag);
                         if (npc.closestDistance.mag > distance.mag) {
