@@ -18,7 +18,7 @@ define(function (require) {
 
     return function (type, pos, direction, shipVel) {
 
-        var player = new shipEntity('players', type, pos, direction, shipVel),
+        var player = new shipEntity('npcs', type, pos, direction, shipVel),
             stickThreshold = 0.3;
 
         player.setSprite(new Facade.Polygon({

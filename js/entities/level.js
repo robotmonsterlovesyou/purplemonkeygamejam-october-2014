@@ -25,7 +25,7 @@ define(function (require) {
 
             level.data = levelData;
 
-            world.entities.players.push(new playerEntity('team', { x: world.stage.width() / 2, y: world.stage.height() / 2}));
+            world.entities.npcs.team.push(new playerEntity('team', { x: world.stage.width() / 2, y: world.stage.height() / 2}));
 
             Object.keys(levelData.npcs).forEach(function (key) {
 
