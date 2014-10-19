@@ -10,8 +10,7 @@ html, body {
 }
 
 body {
-    background: #111 url('../images/starfield.png');
-    background-size: 30%;
+    background: url('../images/starfield.png');
     background-position: 0px 0px;
 }
 
