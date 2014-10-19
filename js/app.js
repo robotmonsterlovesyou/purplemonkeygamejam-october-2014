@@ -57,20 +57,22 @@ define(function (require) {
         });
     }
 
-    function playAudio (audioBuffer, delay) {
+    function playAudio (audioBuffer, volume, delay) {
         bgMusic = audioContext.createBufferSource();
         bgMusic.buffer = audioBuffer;
         bgMusic.loop = true;
-        bgMusic.connect(audioContext.destination);
+        var amp = audioContext.createGain();
+        amp.gain.value = volume;
+        bgMusic.connect(amp);
+        amp.connect(audioContext.destination);
         bgMusic.start(audioContext.currentTime + delay);
-    console.log(audioContext.currentTime);
     }
 
-    function playBgMusic (bgFile, delay) {
+    function playBgMusic (bgFile, volume, delay) {
         stopBgMusic(delay);
         var bgBuffer = fetchAudio(bgFile, function( arrayBuffer ) {
         decodeAudio(arrayBuffer, function( audioBuffer ) {
-            playAudio(audioBuffer, delay);
+            playAudio(audioBuffer, volume, delay);
         });
     });
     }
@@ -81,7 +83,7 @@ define(function (require) {
         }
     }
 
-    playBgMusic('sfx/bg1.ogg', 0);
+    playBgMusic('sfx/bg-ambience.ogg', 0.5, 0);
 
     // end music stuff
 
@@ -111,7 +113,7 @@ define(function (require) {
             } else {
 
                 stage.start(0);
-                playBgMusic('sfx/bg1.ogg', 0);
+                playBgMusic('sfx/bg-ambience.ogg', 0.5, 0);
             }
 
         }
