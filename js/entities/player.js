@@ -16,9 +16,9 @@ define(function (require) {
 
     require('facadejs-SATjs-plugin');
 
-    return function (faction, pos, direction, shipVel) {
+    return function (type, pos, direction, shipVel) {
 
-        var player = new shipEntity('players', faction, pos, direction, shipVel),
+        var player = new shipEntity('players', type, pos, direction, shipVel),
             stickThreshold = 0.3;
 
         player.setSprite(new Facade.Polygon({

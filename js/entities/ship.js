@@ -16,9 +16,9 @@ define(function (require) {
 
     require('facadejs-SATjs-plugin');
 
-    return function (type, faction, pos, direction) {
+    return function (type, subtype, pos, direction) {
 
-        var ship = new entityEntity(type, faction);
+        var ship = new entityEntity(type, subtype);
 
         ship.faction = faction;
         ship.velocity = {
@@ -61,7 +61,7 @@ define(function (require) {
 
             Object.keys(world.entities.npcs).forEach(function (key) {
 
-                if (key !== faction) {
+                if (key !== subtype) {
 
                     world.entities.npcs[key].forEach(function (enemyNpc) {
 
@@ -88,7 +88,7 @@ define(function (require) {
             new sfx('sfx/explosion.ogg').volume(.8).play();
 
             world.entities.particles.push(new particleEntity(this.sprite.getAllOptions()));
-            world.entities.collectibles[faction].push(new collectibleEntity(faction, this.sprite.getAllOptions()));
+            world.entities.collectibles[subtype].push(new collectibleEntity(subtype, this.sprite.getAllOptions()));
 
             this.__proto__.destroy.call(this);
 

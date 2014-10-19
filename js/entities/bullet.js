@@ -14,9 +14,9 @@ define(function (require) {
 
     require('facadejs-SATjs-plugin');
 
-    return function (faction, pos, direction, shipVel, expiration) {
+    return function (type, pos, direction, shipVel, expiration) {
 
-        var bullet = new entityEntity('bullets', faction),
+        var bullet = new entityEntity('bullets', type),
             shipVelC = Utils.polarToCart(shipVel.mag, shipVel.dir),
             bulletVelC = Utils.polarToCart(7, direction),
             bulletVelP = Utils.cartToPolar(shipVelC.x + bulletVelC.x, shipVelC.y + bulletVelC.y),

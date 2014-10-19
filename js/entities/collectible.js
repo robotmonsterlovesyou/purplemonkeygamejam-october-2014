@@ -15,9 +15,9 @@ define(function (require) {
 
     require('facadejs-SATjs-plugin');
 
-    return function (faction, pos) {
+    return function (type, pos) {
 
-        var collectible = new entityEntity('collectibles', faction)
+        var collectible = new entityEntity('collectibles', type)
 
         collectible.setSprite(new Facade.Polygon({
             points: [[0,3],[6,0],[0,-3],[-6,0]],
