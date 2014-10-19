@@ -160,6 +160,8 @@ define(function (require) {
             if (type !== newType) {
 
                 temp = world.entities.npcs[type].splice(world.entities.npcs[type].indexOf(this), 1);
+
+                temp[0]._container = world.entities.npcs[newType];
                 world.entities.npcs[newType].push(temp[0]);
 
                 this.sprite.setOptions({

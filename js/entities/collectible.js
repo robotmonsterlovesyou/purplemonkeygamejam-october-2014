@@ -44,7 +44,7 @@ define(function (require) {
 
                     hit = true;
 
-                    // player.switchTeams(type);
+                    player.switchTeams(type);
 
                 }
 
