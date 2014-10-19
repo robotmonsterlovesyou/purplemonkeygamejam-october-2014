@@ -60,7 +60,7 @@ define(function (require) {
 
             }
 
-        }
+        };
 
         if (faction === 'team') {
 

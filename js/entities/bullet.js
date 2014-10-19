@@ -84,7 +84,7 @@ define(function (require) {
 
             }
 
-        }
+        };
 
         bulletSFX.play();
 
