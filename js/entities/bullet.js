@@ -8,7 +8,7 @@ define(function (require) {
     var Facade = require('facade'),
         Gamepad = require('gamepadjs'),
         Utils = require('utils'),
-        buzz = require('buzz'),
+        sfx = require('sfx'),
         world = require('entities/world'),
         controls = new Gamepad();
 
@@ -24,7 +24,7 @@ define(function (require) {
             shipVelC = Utils.polarToCart(shipVel.mag, shipVel.dir),
             bulletVelC = Utils.polarToCart(7, direction),
             bulletVelP = Utils.cartToPolar(shipVelC.x + bulletVelC.x, shipVelC.y + bulletVelC.y),
-            bulletSFX = new buzz.sound('sfx/laser.ogg');
+            bulletSFX = new sfx('sfx/laser.ogg');
 
         function detectHit () {
 
