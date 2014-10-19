@@ -129,9 +129,20 @@ define(function (require) {
 
             }
 
+            controls._events = {
+                gamepad: [],
+                axes: [],
+                keyboard: {}
+            };
+
             controls.pause();
 
             player.destroyShip();
+
+            player.velocity = {
+                mag: 0,
+                dir: 0
+            };
 
         };
 
