@@ -6,6 +6,7 @@ define(function (require) {
     'use strict';
 
     var Facade = require('facade'),
+        Utils = require('utils'),
         world = require('entities/world'),
         camera = require('entities/camera'),
         entity = function () {
@@ -16,10 +17,12 @@ define(function (require) {
                 fillStyle: 'red'
             });
 
-            this.sprite.SAT('setVector');
+            this.velocity = {
+                mag: 0,
+                dir: 0
+            };
 
-            this.velocity = 0;
-            this.direction = 0;
+            this.sprite.SAT('setVector');
 
             this._container;
 
@@ -46,6 +49,17 @@ define(function (require) {
             this.destroy();
 
         } else {
+
+            var move = Utils.polarToCart(this.velocity.mag, this.velocity.dir),
+                newPos = {
+                    x: this.sprite.getOption('x') + move.x,
+                    y: this.sprite.getOption('y') + move.y
+                };
+
+            this.sprite.setOptions({
+                x: newPos.x,
+                y: newPos.y,
+            });
 
             this.sprite.SAT('setVector');
 
