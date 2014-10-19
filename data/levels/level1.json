@@ -14,13 +14,5 @@
                 "strokeStyle": "hsl(106, 100%, 50%)"
             }
         }
-    },
-    "players": {
-        "team": {
-            "sprite": {
-                "fillStyle": "hsla(293, 100%, 50%, 0.65)",
-                "strokeStyle": "#fff"
-            }
-        }
     }
 }

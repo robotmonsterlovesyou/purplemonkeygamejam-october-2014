@@ -6,7 +6,6 @@ define(function (require) {
     'use strict';
 
     var entities = {
-            players: [],
             npcs: {
                 team: [],
                 enemies: []
@@ -62,18 +61,6 @@ define(function (require) {
 
             });
 
-            entities.players.forEach(function (entity) {
-
-                entity.update();
-
-            });
-
-            entities.particles.forEach(function (entity) {
-
-                entity.update();
-
-            });
-
             entities.particles.forEach(function (entity) {
 
                 entity.update();
@@ -113,12 +100,6 @@ define(function (require) {
                     array.push(entity.sprite);
 
                 });
-
-            });
-
-            entities.players.forEach(function (entity) {
-
-                array.push(entity.sprite);
 
             });
 
