@@ -15,9 +15,9 @@ define(function (require) {
 
     require('facadejs-SATjs-plugin');
 
-    return function (faction, pos, direction) {
+    return function (type, faction, pos, direction) {
 
-        var ship = new entityEntity('factions', faction);
+        var ship = new entityEntity(type, faction);
 
         ship.velocity = {
             mag: Math.floor(Math.random() * 2) === 1 ? 1 : -1,

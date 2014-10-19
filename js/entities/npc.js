@@ -9,7 +9,7 @@ define(function (require) {
 
     return function (faction, pos, direction) {
 
-        var npc = new shipEntity(faction, pos, direction);
+        var npc = new shipEntity('factions', faction, pos, direction);
 
         return npc;
 
