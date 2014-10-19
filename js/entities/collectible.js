@@ -20,13 +20,15 @@ define(function (require) {
         var collectible = new entityEntity('collectibles', type)
 
         collectible.setSprite(new Facade.Polygon({
-            points: [[0,3],[6,0],[0,-3],[-6,0]],
+            points: [[0,5],[5,0],[0,-5],[-5,0]],
             x: pos.x,
             y: pos.y,
             lineJoin: 'round',
             anchor: 'top',
             rotate: Math.random() * 360,
-            fillStyle: '#fff'
+            fillStyle: world.activeState.data.npcs[type].sprite.strokeStyle,
+            strokeStyle: world.activeState.data.npcs[type].sprite.fillStyle,
+            lineWidth: 6
         }));
 
         collectible.expiration = Utils.performanceNow() + expiration;
