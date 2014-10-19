@@ -1,96 +1,72 @@
 /*jslint browser: true */
-/*globals Facade, Gamepad, $ */
+/*globals Facade */
 
 define(function (require) {
 
     'use strict';
 
     var Facade = require('facade'),
-        Gamepad = require('gamepadjs'),
-        sfx = require('sfx'),
-        world = require('entities/world'),
         camera = require('entities/camera'),
-        bulletEntity = require('entities/bullet'),
-        controls = new Gamepad();
+        entityEntity = require('entities/entity');
+
+    require('facadejs-SATjs-plugin');
 
     return function (faction, pos, direction) {
 
-        if (!pos) {
+        var npc = new entityEntity('factions', faction);
 
-            pos = { x: 0, y: 0 };
+        npc.setSprite(new Facade.Rect({
+            x: pos.x,
+            y: pos.y,
+            width: 10,
+            height: 10,
+            fillStyle: 'green'
+        }));
 
-        }
+        npc.update = function () {
 
-        var npc,
-            explosionSFX = new sfx('sfx/explosion.ogg').volume(.8);
+            var pos = this.sprite.getAllOptions(),
+                speed = 1;
 
-        npc = {
-            sprite: new Facade.Rect({
-                x: pos.x,
-                y: pos.y,
-                width: 10,
-                height: 10,
-                fillStyle: 'green'
-            }),
-            velocity: 0,
-            direction: 0,
-            weaponCooldown: 0,
-            destory: function () {
+            if (direction[0] > 0) {
 
-                explosionSFX.play();
+                pos.x += speed;
 
-                world.entities.factions[faction].splice(world.entities.factions[faction].indexOf(npc), 1);
+            } else if (direction[0] < 0) {
 
-            },
-            update: function () {
-
-                var pos = npc.sprite.getAllOptions(),
-                    speed = 1;
-
-                if (direction[0] > 0) {
-
-                    pos.x += speed;
-
-                } else if (direction[0] < 0) {
-
-                    pos.x -= speed;
-
-                }
-
-                if (direction[1] > 0) {
-
-                    pos.y += speed;
-
-                } else if (direction[1] < 0) {
-
-                    pos.y -= speed;
-
-                }
-
-                if (!camera.isVisible(npc)) {
-
-                    world.entities.factions[faction].splice(world.entities.factions[faction].indexOf(npc), 1);
-
-                } else {
-
-                    npc.sprite.setOptions({ x: pos.x, y: pos.y });
-
-                    npc.sprite.SAT('setVector');
-
-                }
+                pos.x -= speed;
 
             }
-        };
+
+            if (direction[1] > 0) {
+
+                pos.y += speed;
+
+            } else if (direction[1] < 0) {
+
+                pos.y -= speed;
+
+            }
+
+            if (!camera.isVisible(npc)) {
+
+                this.destroy();
+
+            } else {
+
+                npc.sprite.setOptions({ x: pos.x, y: pos.y });
+
+                npc.sprite.SAT('setVector');
+
+            }
+
+        }
 
         if (faction === 'team') {
 
             npc.sprite.setOptions({ fillStyle: 'purple' });
 
         }
-
-        require('facadejs-SATjs-plugin');
-
-        npc.sprite.SAT('setVector');
 
         return npc;
 
