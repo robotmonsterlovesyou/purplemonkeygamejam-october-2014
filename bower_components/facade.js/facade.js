@@ -1001,7 +1001,8 @@
             lineWidth: 0,
             lineCap: 'butt',
             lineJoin: 'miter',
-            closePath: true
+            closePath: true,
+            setLineDash: [[0]]
         });
 
         if (updated) {
