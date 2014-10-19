@@ -10,6 +10,7 @@ define(function (require) {
         Utils = require('utils'),
         sfx = require('sfx'),
         world = require('entities/world'),
+        camera = require('entities/camera'),
         controls = new Gamepad();
 
     return function (faction, pos, direction, shipVel) {
@@ -80,7 +81,7 @@ define(function (require) {
                     rotate: this.velocity.dir * 180 / Math.PI
                 });
 
-                if (newPos.x < 0 || newPos.x > world.stage.width() || newPos.y < 0 || newPos.y > world.stage.height() || detectHit()) {
+                if (!camera.isVisible(bullet) || detectHit()) {
 
                     bullet.destory();
 

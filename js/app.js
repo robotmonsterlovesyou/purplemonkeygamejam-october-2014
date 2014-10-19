@@ -9,11 +9,13 @@ define(function (require) {
         utils = require('utils'),
         stage = new Facade(document.querySelector('canvas')),
         world = require('entities/world'),
+        camera = require('entities/camera'),
         playerEntity = require('entities/player'),
         npcEntity = require('entities/npc'),
         player1 = new playerEntity('team', { x: stage.width() / 2, y: stage.height() / 2});
 
     world.stage = stage;
+    camera.stage = stage;
 
     world.entities.players.push(player1);
 

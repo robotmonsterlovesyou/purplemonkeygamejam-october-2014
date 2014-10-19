@@ -9,6 +9,7 @@ define(function (require) {
         Gamepad = require('gamepadjs'),
         sfx = require('sfx'),
         world = require('entities/world'),
+        camera = require('entities/camera'),
         bulletEntity = require('entities/bullet'),
         controls = new Gamepad();
 
@@ -66,7 +67,7 @@ define(function (require) {
 
                 }
 
-                if (pos.x < 0 || pos.x > world.stage.width() || pos.y < 0 || pos.y > world.stage.height()) {
+                if (!camera.isVisible(npc)) {
 
                     world.entities.factions[faction].splice(world.entities.factions[faction].indexOf(npc), 1);
 
