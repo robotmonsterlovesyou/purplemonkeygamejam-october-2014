@@ -46,8 +46,8 @@ define(function (require) {
 
             var options = particle.sprite.getAllOptions();
 
-            particle.spread += .2;
-            options.opacity -= 1;
+            particle.spread += .05;
+            options.opacity -= .5;
 
             if (options.opacity < 0) {
 
@@ -69,9 +69,7 @@ define(function (require) {
 
     return function (pos) {
 
-        var temp = new particleGenerator(pos);
-
-        return temp;
+        return new particleGenerator(pos);
 
     }
 
