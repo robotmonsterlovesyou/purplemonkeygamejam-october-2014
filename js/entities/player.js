@@ -24,7 +24,7 @@ define(function (require) {
 
         var player = {
             sprite: new Facade.Image('images/player.png', {
-                anchor: 'center/right',
+                anchor: 'center',
                 scale: 0.5,
                 x: pos.x,
                 y: pos.y
