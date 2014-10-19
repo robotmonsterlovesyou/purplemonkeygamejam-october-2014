@@ -16,18 +16,23 @@ define(function (require) {
 
         var npc = new entityEntity('factions', faction);
 
-        npc.setSprite(new Facade.Rect({
-            x: pos.x,
-            y: pos.y,
-            width: 10,
-            height: 10,
-            fillStyle: 'green'
-        }));
-
         npc.velocity = {
             mag: Math.floor(Math.random() * 2) === 1 ? 1 : -1,
             dir: Math.random() * 2 * Math.PI
         };
+
+        npc.setSprite(new Facade.Polygon({
+            points: [[0,0], [24, 12], [0, 24]],
+            fillStyle: 'green',
+            lineWidth: 2,
+            strokeStyle: 'rgb(255, 255, 255)',
+            anchor: 'center',
+            x: pos.x,
+            y: pos.y,
+            rotate: npc.velocity.dir * 180 / Math.PI
+        }));
+
+
 
         npc.update = function () {
 

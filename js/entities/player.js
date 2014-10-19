@@ -24,7 +24,7 @@ define(function (require) {
             stickThreshold = 0.3;
 
         player.setSprite(new Facade.Polygon({
-            points: [[0,0], [32, 16], [0, 32]],
+            points: [[0,0], [24, 12], [0, 24]],
             fillStyle: '',
             lineWidth: 2,
             strokeStyle: 'rgb(255, 255, 255)',
