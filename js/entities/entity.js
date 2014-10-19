@@ -71,7 +71,15 @@ define(function (require) {
 
         var temp = new entity();
 
-        temp._container = world.entities[type][subtype];
+        if (Object.keys(world.entities[type]).indexOf(subtype) !== -1) {
+
+            temp._container = world.entities[type][subtype];
+
+        } else {
+
+            temp._container = world.entities[type];
+
+        }
 
         return temp;
 
