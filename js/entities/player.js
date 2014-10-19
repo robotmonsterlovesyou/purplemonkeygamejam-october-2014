@@ -144,6 +144,11 @@ define(function (require) {
                 dir: 0
             };
 
+            player.sprite.setOptions({
+                x: world.stage.width() / 2,
+                y: world.stage.height() / 2
+            })
+
         };
 
         player.update = function () {

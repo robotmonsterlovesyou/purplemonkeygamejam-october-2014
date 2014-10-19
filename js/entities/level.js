@@ -22,9 +22,7 @@ define(function (require) {
             players: [],
             spawnPlayer: function (id) {
 
-                level.players.push(new playerEntity('team', { x: world.stage.width() / 2, y: world.stage.height() / 2}, {
-
-                }));
+                level.players.push(new playerEntity('team', { x: world.stage.width() / 2, y: world.stage.height() / 2}));
 
                 world.entities.npcs.team.push(level.players[id]);
 
