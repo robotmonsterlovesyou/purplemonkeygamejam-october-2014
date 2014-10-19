@@ -48,14 +48,14 @@ define(function (require) {
         }
 
         bullet = {
-            sprite: new Facade.Rect({
+            sprite: new Facade.Polygon({
+                points: [[0,3],[6,0],[0,-3],[-6,0]],
                 x: pos.x,
                 y: pos.y,
-                width: 5,
-                height: 5,
-                anchor: 'center',
+                lineJoin: 'round',
+                anchor: 'top',
                 rotate: direction * 180 / Math.PI,
-                fillStyle: 'blue'
+                fillStyle: '#faa'
             }),
             velocity: {
                 mag: bulletVelP.radius,
