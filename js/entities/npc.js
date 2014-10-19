@@ -25,7 +25,7 @@ define(function (require) {
 
         npc.update = function () {
 
-            //npc.checkAi();
+            npc.checkAi();
             npc.updateShip();
         };
 
@@ -37,27 +37,28 @@ define(function (require) {
                 mag: 9999999999,
                 dir: 0
             };
-
+//console.log(world.entities.npcs);
             Object.keys(world.entities.npcs).forEach(function (key) {
 
-                world.entities.npcs[key].forEach(function (entity) {
+                if (key !== npc.subtype) {
 
-                    if (entity !== npc && entity.type !== npc.type) {
+                    world.entities.npcs[key].forEach(function (entity) {
+
                         var distance = npc.getDistance(entity);
-                        //console.log(closestDistance.mag, distance.mag);
+                        //console.log(npc.closestDistance.mag, distance.mag);
                         if (npc.closestDistance.mag > distance.mag) {
-                            //console.log('c');
+                            console.log('c');
                             npc.closestEnemy = entity;
                             npc.closestDistance = distance;
                         }
-                    }
 
-                });
+                    });
+                }
 
             });
-//console.log(closestEnemy, closestDistance);
+//console.log(npc.closestEnemy, npc.closestDistance);
             // move and fire toward them
-            var vector = Utils.cartToPolar(1, npc.closestDistance.dir);
+            var vector = Utils.polarToCart(1, npc.closestDistance.dir);
             npc.updateMove(vector.x, vector.y);
             if (npc.closestDistance.mag < npc.sightDistance || Math.abs(npc.closestDistance.dir - npc.velocity.dir) > 0.01) {
                 npc.updateWeapon(vector.x, vector.y);
@@ -67,8 +68,8 @@ define(function (require) {
         npc.getDistance = function (ship) {
 
             var diff = {
-                x: npc.sprite.getOption('x') - ship.sprite.getOption('x'),
-                y: npc.sprite.getOption('y') - ship.sprite.getOption('y')
+                x: ship.sprite.getOption('x') - npc.sprite.getOption('x'),
+                y: ship.sprite.getOption('y') - npc.sprite.getOption('y')
             };
 
             return Utils.cartToPolar(diff.x, diff.y);
