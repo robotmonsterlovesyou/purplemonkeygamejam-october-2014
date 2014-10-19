@@ -18,7 +18,7 @@ define(function (require) {
     world.stage = stage;
     camera.stage = stage;
 
-    level1 = new levelEntity('../data/levels/level1.json');
+    level1 = new levelEntity('data/levels/level1.json');
 
     stage.draw(function () {
 
