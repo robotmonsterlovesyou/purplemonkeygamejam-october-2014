@@ -11,6 +11,7 @@ define(function (require) {
         stage = new Facade(document.querySelector('canvas')),
         world = require('entities/world'),
         camera = require('entities/camera'),
+        ui = require('entities/ui'),
         levelEntity = require('entities/level'),
         bgMusic = new music('sfx/bg-ambience.ogg'),
         level1;
@@ -29,6 +30,8 @@ define(function (require) {
         world.update();
 
         this.addToStage(world.fetchAllEntities());
+
+        ui.render();
 
     });
 
