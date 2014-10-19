@@ -25,9 +25,9 @@ define(function (require) {
 
         player.setSprite(new Facade.Polygon({
             points: [[0,0], [24, 12], [0, 24]],
-            fillStyle: '',
+            fillStyle: 'hsla(293, 100%, 50%, 0.65)',
             lineWidth: 2,
-            strokeStyle: 'rgb(255, 255, 255)',
+            strokeStyle: 'hsl(255, 100%, 100%)',
             anchor: 'center',
             x: pos.x,
             y: pos.y
@@ -115,7 +115,7 @@ define(function (require) {
                 player.weapon.cooldown -= .1;
             } else if (stickVel.radius > stickThreshold) {
                 player.weapon.cooldown = .1;
-                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, player.weapon.dir, player.velocity));
+                world.entities.bullets.team.push(new bulletEntity('team', { x: pos.x, y: pos.y }, player.weapon.dir, player.velocity, 2000));
             }
 
         });

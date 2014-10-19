@@ -72,6 +72,20 @@ define(function (require) {
         polarToCart: function (radius, angle) {
 
             return { x: radius * Math.cos(angle), y: radius * Math.sin(angle) };
+        },
+
+        // performance.now() shim --------------------------------------------------
+
+        performanceNow: function () {
+
+            if (!window.performance.now) {
+                var nowOffset = Date.now();
+                window.performance.now = function now() {
+                    return Date.now() - nowOffset;
+                };
+            } else {
+                return window.performance.now();
+            }
         }
     };
 

@@ -14,7 +14,7 @@ define(function (require) {
 
     require('facadejs-SATjs-plugin');
 
-    return function (faction, pos, direction, shipVel) {
+    return function (faction, pos, direction, shipVel, expiration) {
 
         var bullet = new entityEntity('bullets', faction),
             shipVelC = Utils.polarToCart(shipVel.mag, shipVel.dir),
@@ -36,6 +36,8 @@ define(function (require) {
             mag: bulletVelP.radius,
             dir: bulletVelP.angle,
         };
+
+        bullet.expiration = Utils.performanceNow() + expiration;
 
         bullet.detectHit = function () {
 
@@ -72,7 +74,7 @@ define(function (require) {
                 rotate: this.velocity.dir * 180 / Math.PI
             });
 
-            if (!camera.isVisible(bullet) || this.detectHit()) {
+            if ((this.expiration < Utils.performanceNow()) || this.detectHit()) {
 
                 bullet.destroy();
 
